@@ -13,8 +13,6 @@ using AutoRest.Core.Utilities;
 using AutoRest.Core.Utilities.Collections;
 using AutoRest.Extensions.Azure.Model;
 using AutoRest.Extensions.Azure.Properties;
-using AutoRest.Swagger;
-using AutoRest.Swagger.Model;
 using Newtonsoft.Json;
 using ParameterLocation = AutoRest.Core.Model.ParameterLocation;
 using static AutoRest.Core.Utilities.DependencyInjection;
@@ -351,10 +349,8 @@ namespace AutoRest.Extensions.Azure
 
                         if (!string.IsNullOrEmpty(pageableExtension.OperationName))
                         {
-                            nextLinkMethod.Name = CodeNamer.Instance.GetMethodName(SwaggerModeler.GetMethodName(
-                                new Operation { OperationId = pageableExtension.OperationName }));
-                            nextLinkMethod.Group = CodeNamer.Instance.GetMethodGroupName(SwaggerModeler.GetMethodGroup(
-                                new Operation { OperationId = pageableExtension.OperationName }));
+                            nextLinkMethod.Name = CodeNamer.Instance.GetMethodName(pageableExtension.OperationName.Split('_').Last());
+                            nextLinkMethod.Group = CodeNamer.Instance.GetMethodGroupName( pageableExtension.OperationName.Split('_').First());
                         }
                         else
                         {

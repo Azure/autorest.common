@@ -1,13 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
   <PropertyGroup><PowerShell># 2>nul || type %~df0|C:\Windows\system32\find.exe /v "setlocal"|C:\Windows\system32\find.exe /v "errorlevel"|powershell.exe -noninteractive -&amp; exit %errorlevel% || #</PowerShell></PropertyGroup>
 
-  <PropertyGroup Condition="$(Common) == '*Undefined*' OR $(Common) == '' " >
+  <PropertyGroup>
     <VersionPrefix>1.2.2</VersionPrefix>
-    <Common>$(MsBuildThisFileDirectory)</Common>
     <GenerateFullPaths>true</GenerateFullPaths>
-    <!-- <SolutionDir>$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory),AutoRest.sln))/</SolutionDir> -->
     <Common>$(MsBuildThisFileDirectory)</Common>
-    <SolutionDir>$(Common)../../</SolutionDir>
+    <SolutionDir>$(Common)../</SolutionDir>
     <BaseOutputPath>$(MSBuildProjectDirectory)/bin</BaseOutputPath>
     <OutputPath>$(BaseOutputPath)</OutputPath>
  
