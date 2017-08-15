@@ -11,9 +11,10 @@
     <PackageTargetFallback>$(PackageTargetFallback);dotnet;portable-net45+win8;netstandard1.3</PackageTargetFallback>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp1.0</TargetFramework>
+    <RootNamespace>AutoRest.Common.Test</RootNamespace>
   </PropertyGroup>
 
-  <Target Name="Nuke" AfterTargets="clean" >
+  <Target Name="Nuke" AfterTargets="clean">
     <Delete Files="$(BaseOutputPath)**;$(BaseIntermediateOutputPath)razor/**;$(BaseIntermediateOutputPath)Debug/**;$(BaseIntermediateOutputPath)Release/**" />
     <RemoveDir Directories="$(BaseOutputPath);$(BaseIntermediateOutputPath)/Debug;$(BaseIntermediateOutputPath)/Release" />
   </Target>
@@ -22,6 +23,10 @@
     <Content Include="$(MSBuildProjectDirectory)\Resource\**">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Compile Remove="CodeGeneratorsTests.cs" />
   </ItemGroup>
 
   <ItemGroup>

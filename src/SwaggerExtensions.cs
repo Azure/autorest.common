@@ -46,11 +46,15 @@ namespace AutoRest.Extensions
 
         public static void ProcessParameterizedHost(CodeModel codeModel)
         {
+            codeModel.HostParametersFront = codeModel.HostParametersFront ?? Enumerable.Empty<Parameter>();
+            codeModel.HostParametersBack = codeModel.HostParametersBack ?? Enumerable.Empty<Parameter>();
             foreach (var method in codeModel.Methods)
             {
-                method.InsertRange(codeModel.HostParametersFront ?? Enumerable.Empty<Parameter>());
-                method.AddRange(codeModel.HostParametersBack ?? Enumerable.Empty<Parameter>());
+                method.InsertRange(codeModel.HostParametersFront);
+                method.AddRange(codeModel.HostParametersBack);
             }
+            codeModel.HostParametersFront = null;
+            codeModel.HostParametersBack = null;
         }
 
         /// <summary>
@@ -116,7 +120,7 @@ namespace AutoRest.Extensions
             }
 
             List<Property> propertiesToProcess = new List<Property>();
-            foreach(var property in codeModel.Properties)
+            foreach (var property in codeModel.Properties)
             {
                 if (property.Extensions.ContainsKey(ParameterLocationExtension) && property.Extensions[ParameterLocationExtension].ToString().EqualsIgnoreCase("method"))
                 {
@@ -124,17 +128,31 @@ namespace AutoRest.Extensions
                 }
             }
             //set the clientProperty to null for such parameters in the method.
-            foreach(var prop in propertiesToProcess)
+            foreach (var prop in propertiesToProcess)
             {
                 codeModel.Remove(prop);
-                foreach(var method in codeModel.Operations.SelectMany(each => each.Methods))
+                foreach (var parameter in codeModel.HostParametersFront ?? Enumerable.Empty<Parameter>())
                 {
-                    foreach(var parameter in method.Parameters)
+                    if (parameter.Name.FixedValue == prop.Name.FixedValue && parameter.IsClientProperty)
+                    {
+                        parameter.ClientProperty = null;
+                    }
+                }
+                foreach (var parameter in codeModel.HostParametersBack ?? Enumerable.Empty<Parameter>())
+                {
+                    if (parameter.Name.FixedValue == prop.Name.FixedValue && parameter.IsClientProperty)
+                    {
+                        parameter.ClientProperty = null;
+                    }
+                }
+                foreach (var method in codeModel.Operations.SelectMany(each => each.Methods))
+                {
+                    foreach (var parameter in method.Parameters)
                     {
                         if (parameter.Name.FixedValue == prop.Name.FixedValue && parameter.IsClientProperty)
                         {
                             parameter.ClientProperty = null;
-                        } 
+                        }
                     }
                 }
             }
@@ -233,7 +251,7 @@ namespace AutoRest.Extensions
             {
                 basePath = "";
             }
-       
+
             string propertyName = property.SerializedName;
             if (escapePropertyName)
             {
@@ -315,9 +333,9 @@ namespace AutoRest.Extensions
         {
             if (codeModel == null)
             {
-                throw new ArgumentNullException("codeModel");    
+                throw new ArgumentNullException("codeModel");
             }
-          
+
 
             foreach (var method in codeModel.Methods)
             {
@@ -327,7 +345,7 @@ namespace AutoRest.Extensions
                 if (bodyParameter != null)
                 {
                     var bodyParameterType = bodyParameter.ModelType as CompositeType;
-                    if (bodyParameterType != null && 
+                    if (bodyParameterType != null &&
                         !bodyParameterType.BaseIsPolymorphic &&
                         (bodyParameterType.ComposedProperties.Count(p => !p.IsConstant && !p.IsReadOnly) <= Settings.Instance.PayloadFlatteningThreshold ||
                          bodyParameter.ShouldBeFlattened()))

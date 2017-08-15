@@ -4,9 +4,7 @@
 using System.IO;
 using System.Text;
 using AutoRest.Core.Model;
-using AutoRest.Core.Logging;
 using AutoRest.Core.Tests.Resource;
-using AutoRest.Core.Tests.Templates;
 using AutoRest.Core.Utilities;
 using Xunit;
 using static AutoRest.Core.Utilities.DependencyInjection;
@@ -15,7 +13,7 @@ namespace AutoRest.Core.Tests
     [Collection("AutoRest Tests")]
     public class CodeGeneratorsTests
     {
-        private readonly MemoryFileSystem _fileSystem = new MemoryFileSystem();
+        private readonly MemoryFileSystem _fileSystemInput = new MemoryFileSystem();
 
         public CodeGeneratorsTests()
         {
@@ -24,7 +22,7 @@ namespace AutoRest.Core.Tests
 
         private void SetupMock()
         {
-            _fileSystem.WriteAllText("RedisResource.json", File.ReadAllText(Path.Combine("Resource", "RedisResource.json")));
+            _fileSystemInput.WriteAllText("RedisResource.json", File.ReadAllText(Path.Combine("Resource", "RedisResource.json")));
         }
 
         [Fact]
@@ -35,13 +33,13 @@ namespace AutoRest.Core.Tests
                 var settings = new Settings
                 {
                     CodeGenerator = "CSharp",
-                    FileSystem = _fileSystem,
+                    FileSystemInput = _fileSystemInput,
                     OutputDirectory = Path.GetTempPath()
                 };
                 SampleCodeGenerator codeGenerator = new SampleCodeGenerator();
                 codeGenerator.Generate(New<CodeModel>()).GetAwaiter().GetResult();
                 Assert.Contains(Path.Combine(settings.OutputDirectory, settings.ModelsName),
-                    _fileSystem.VirtualStore.Keys);
+                    settings.FileSystemOutput.VirtualStore.Keys);
             }
         }
 
