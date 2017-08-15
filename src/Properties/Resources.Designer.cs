@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AutoRest.Core.Properties {
+namespace AutoRest.Common.Properties {
     using System;
     using System.Reflection;
     
@@ -23,7 +23,7 @@ namespace AutoRest.Core.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Resources {
+    internal class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -37,10 +37,10 @@ namespace AutoRest.Core.Properties {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Resources.ResourceManager ResourceManager {
+        internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("AutoRest.Core.Properties.Resources", typeof(Resources).GetTypeInfo().Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("AutoRest.Common.Properties.Resources", typeof(Resources).GetTypeInfo().Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -52,7 +52,7 @@ namespace AutoRest.Core.Properties {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Globalization.CultureInfo Culture {
+        internal static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -64,7 +64,7 @@ namespace AutoRest.Core.Properties {
         /// <summary>
         ///   Looks up a localized string similar to AutoRest Core {0}.
         /// </summary>
-        public static string AutoRestCore {
+        internal static string AutoRestCore {
             get {
                 return ResourceManager.GetString("AutoRestCore", resourceCulture);
             }
@@ -82,14 +82,15 @@ namespace AutoRest.Core.Properties {
         ///    TypeName: PluginCsa, AutoRest.CSharp.Azure.JsonRpcClient
         ///  Ruby:
         ///    TypeName: PluginRb, AutoRest.Ruby
+        ///  Php:
+        ///    TypeName: PluginPhp, AutoRest.Php
         ///  Azure.Ruby:
         ///    TypeName: PluginRba, AutoRest.Ruby.Azure
         ///  NodeJS:
         ///    TypeName: PluginJs, AutoRest.NodeJS
-        ///  Azure.NodeJS:
-        ///    TypeName: PluginJsa, AutoRest.NodeJS. [rest of string was truncated]&quot;;.
+        ///  Azure.Nod [rest of string was truncated]&quot;;.
         /// </summary>
-        public static string ConfigurationKnownPlugins {
+        internal static string ConfigurationKnownPlugins {
             get {
                 return ResourceManager.GetString("ConfigurationKnownPlugins", resourceCulture);
             }
@@ -98,16 +99,25 @@ namespace AutoRest.Core.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Error loading {0} assembly: {1}.
         /// </summary>
-        public static string ErrorLoadingAssembly {
+        internal static string ErrorLoadingAssembly {
             get {
                 return ResourceManager.GetString("ErrorLoadingAssembly", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error parsing swagger file.
+        /// </summary>
+        internal static string ErrorParsingSpec {
+            get {
+                return ResourceManager.GetString("ErrorParsingSpec", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Plugin {0} not found.
         /// </summary>
-        public static string ExtensionNotFound {
+        internal static string ExtensionNotFound {
             get {
                 return ResourceManager.GetString("ExtensionNotFound", resourceCulture);
             }
@@ -116,43 +126,97 @@ namespace AutoRest.Core.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Successfully initialized {0} Code Generator {1}.
         /// </summary>
-        public static string GeneratorInitialized {
+        internal static string GeneratorInitialized {
             get {
                 return ResourceManager.GetString("GeneratorInitialized", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &quot;HEAD &apos;{0}&apos; method missing 404 status code section -- this might be unintentional..
+        /// </summary>
+        internal static string HeadMethodPossibleIncorrectSpecification {
+            get {
+                return ResourceManager.GetString("HeadMethodPossibleIncorrectSpecification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Initializing code generator..
         /// </summary>
-        public static string InitializingCodeGenerator {
+        internal static string InitializingCodeGenerator {
             get {
                 return ResourceManager.GetString("InitializingCodeGenerator", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The value &apos;{0}&apos; provided for property &apos;{1}&apos; of extension &apos;{2} is invalid. Valid values are: &apos;{3}&apos;..
+        /// </summary>
+        internal static string InvalidExtensionProperty {
+            get {
+                return ResourceManager.GetString("InvalidExtensionProperty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Property name {0} cannot be used as an Identifier, as it contains only invalid characters..
         /// </summary>
-        public static string InvalidIdentifierName {
+        internal static string InvalidIdentifierName {
             get {
                 return ResourceManager.GetString("InvalidIdentifierName", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; is not implemented in SwaggerSchema.ToType extension method..
+        /// </summary>
+        internal static string InvalidTypeInSwaggerSchema {
+            get {
+                return ResourceManager.GetString("InvalidTypeInSwaggerSchema", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &apos;{0}&apos; code generator does not support code generation to a single file..
         /// </summary>
-        public static string LanguageDoesNotSupportSingleFileGeneration {
+        internal static string LanguageDoesNotSupportSingleFileGeneration {
             get {
                 return ResourceManager.GetString("LanguageDoesNotSupportSingleFileGeneration", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} needs to have a value..
+        /// </summary>
+        internal static string ODataEmpty {
+            get {
+                return ResourceManager.GetString("ODataEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Method with {0} needs to have &quot;$filter&quot; parameter..
+        /// </summary>
+        internal static string ODataFilterMissing {
+            get {
+                return ResourceManager.GetString("ODataFilterMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} needs to have a valid definition reference..
+        /// </summary>
+        internal static string ODataInvalidReferance {
+            get {
+                return ResourceManager.GetString("ODataInvalidReferance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Parameter &apos;{0}&apos; is required..
         /// </summary>
-        public static string ParameterValueIsMissing {
+        internal static string ParameterValueIsMissing {
             get {
                 return ResourceManager.GetString("ParameterValueIsMissing", resourceCulture);
             }
@@ -161,7 +225,7 @@ namespace AutoRest.Core.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Parameter &apos;{0}&apos; value is not valid. Expect &apos;{1}&apos;.
         /// </summary>
-        public static string ParameterValueIsNotValid {
+        internal static string ParameterValueIsNotValid {
             get {
                 return ResourceManager.GetString("ParameterValueIsNotValid", resourceCulture);
             }
@@ -170,7 +234,7 @@ namespace AutoRest.Core.Properties {
         /// <summary>
         ///   Looks up a localized string similar to path cannot be null or an empty string or a string with white spaces while getting the parent directory.
         /// </summary>
-        public static string PathCannotBeNullOrEmpty {
+        internal static string PathCannotBeNullOrEmpty {
             get {
                 return ResourceManager.GetString("PathCannotBeNullOrEmpty", resourceCulture);
             }
@@ -179,7 +243,7 @@ namespace AutoRest.Core.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Type &apos;{0}&apos; name should be assembly qualified. For example &apos;ClassName, AssemblyName&apos;.
         /// </summary>
-        public static string TypeShouldBeAssemblyQualified {
+        internal static string TypeShouldBeAssemblyQualified {
             get {
                 return ResourceManager.GetString("TypeShouldBeAssemblyQualified", resourceCulture);
             }

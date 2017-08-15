@@ -12,10 +12,10 @@ using AutoRest.Core.Logging;
 using AutoRest.Core.Utilities;
 using AutoRest.Core.Utilities.Collections;
 using AutoRest.Extensions.Azure.Model;
-using AutoRest.Extensions.Azure.Properties;
 using Newtonsoft.Json;
 using ParameterLocation = AutoRest.Core.Model.ParameterLocation;
 using static AutoRest.Core.Utilities.DependencyInjection;
+using AutoRest.Common.Properties;
 
 namespace AutoRest.Extensions.Azure
 {
@@ -66,10 +66,6 @@ namespace AutoRest.Extensions.Azure
                 {
                     throw new ArgumentNullException("codeModel");
                 }
-               
-
-                // This extension from general extensions must be run prior to Azure specific extensions.
-                ProcessParameterizedHost(codeModel);
 
                 ProcessClientRequestIdExtension(codeModel);
                 UpdateHeadMethods(codeModel);
@@ -149,6 +145,22 @@ namespace AutoRest.Extensions.Azure
         }
 
         /// <summary>
+        /// Removes #/definitions/ or url#/definitions from the reference path.
+        /// </summary>
+        /// <param name="reference">Definition reference.</param>
+        /// <returns>Definition name with path.</returns>
+        public static string StripDefinitionPath(string reference)
+        {
+            if (reference != null && reference.Contains("#/definitions/"))
+            {
+                reference = reference.Substring(reference.IndexOf("#/definitions/", StringComparison.OrdinalIgnoreCase) +
+                    "#/definitions/".Length);
+            }
+
+            return reference;
+        }
+
+        /// <summary>
         /// Converts Azure Parameters to regular parameters.
         /// </summary>
         /// <param name="codeModelient">Service client</param>
@@ -169,7 +181,7 @@ namespace AutoRest.Extensions.Azure
                         Resources.ODataEmpty, ODataExtension));
                 }
 
-                odataModelPath = odataModelPath.StripDefinitionPath();
+                odataModelPath = StripDefinitionPath(odataModelPath);
 
                 CompositeType odataType = codeModel.ModelTypes
                     .FirstOrDefault(t => t.Name.EqualsIgnoreCase(odataModelPath));

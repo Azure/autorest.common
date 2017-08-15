@@ -8,12 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoRest.Core.Model;
 using AutoRest.Core.Logging;
-using AutoRest.Core.Properties;
 using AutoRest.Core.Utilities;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using System.Linq;
+using AutoRest.Common.Properties;
 
 namespace AutoRest.Core
 {

@@ -4,7 +4,6 @@
 using System;
 using System.Globalization;
 using System.Linq;
-using AutoRest.Core.Properties;
 
 namespace AutoRest.Core.Logging
 {

@@ -26,7 +26,7 @@ namespace AutoRest
       connection.Dispatch<string, string, bool>(nameof(Process), Process);
       connection.DispatchNotification("Shutdown", connection.Stop);
 
-      // wait for somethign to do.
+      // wait for something to do.
       await connection;
 
       Console.Error.WriteLine("Shutting Down");

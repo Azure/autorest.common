@@ -2,20 +2,12 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Globalization;
 using System.Linq;
-using System.Text.RegularExpressions;
 using AutoRest.Core;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
-using AutoRest.Extensions.Properties;
-using AutoRest.Swagger;
-using AutoRest.Swagger.Model;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using ParameterLocation = AutoRest.Core.Model.ParameterLocation;
 using static AutoRest.Core.Utilities.DependencyInjection;
 
@@ -33,8 +25,6 @@ namespace AutoRest.Extensions
         public const string FlattenOriginalTypeName = "x-ms-client-flatten-original-type-name";
         public const string ParameterGroupExtension = "x-ms-parameter-grouping";
         public const string ParameterizedHostExtension = "x-ms-parameterized-host";
-        public const string UseSchemePrefix = "useSchemePrefix";
-        public const string PositionInOperation = "positionInOperation";
         public const string ParameterLocationExtension = "x-ms-parameter-location";
         public const string ExternalExtension = "x-ms-external";
         public const string HeaderCollectionPrefix = "x-ms-header-collection-prefix";
@@ -54,108 +44,12 @@ namespace AutoRest.Extensions
             ProcessParameterizedHost(codeModel);
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase", Justification = "We are normalizing a URI, which is lowercase by convention")]
         public static void ProcessParameterizedHost(CodeModel codeModel)
         {
-            using (NewContext)
+            foreach (var method in codeModel.Methods)
             {
-                if (codeModel == null)
-                {
-                    throw new ArgumentNullException("codeModel");
-                }
-
-                if (codeModel.Extensions.TryGetValue(ParameterizedHostExtension, out var extensionObject) &&
-                    !codeModel.Extensions.ContainsKey(ParameterizedHostExtension + "DONE"))
-                {
-                    var hostExtension = extensionObject as JObject;
-                    codeModel.Extensions.Add(ParameterizedHostExtension + "DONE", true);
-
-                    if (hostExtension != null)
-                    {
-                        var hostTemplate = (string) hostExtension["hostTemplate"];
-                        var parametersJson = hostExtension["parameters"].ToString();
-                        var useSchemePrefix = true;
-                        if (hostExtension[UseSchemePrefix] != null)
-                        {
-                            useSchemePrefix = bool.Parse(hostExtension[UseSchemePrefix].ToString());
-                        }
-
-                        var position = "first";
-
-                        if (hostExtension[PositionInOperation] != null)
-                        {
-                            var pat = "^(fir|la)st$";
-                            Regex r = new Regex(pat, RegexOptions.IgnoreCase);
-                            var text = hostExtension[PositionInOperation].ToString();
-                            Match m = r.Match(text);
-                            if (!m.Success)
-                            {
-                                throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture,
-                                    Resources.InvalidExtensionProperty, text, PositionInOperation,
-                                    ParameterizedHostExtension, "first, last"));
-                            }
-                            position = text;
-                        }
-
-                        if (!string.IsNullOrEmpty(parametersJson))
-                        {
-                            var serviceDefinition = Singleton<ServiceDefinition>.Instance;
-                            var jsonSettings = new JsonSerializerSettings
-                            {
-                                TypeNameHandling = TypeNameHandling.None,
-                                MetadataPropertyHandling = MetadataPropertyHandling.Ignore
-                            };
-
-                            var swaggerParams = JsonConvert.DeserializeObject<List<SwaggerParameter>>(parametersJson,
-                                jsonSettings);
-                            List<Parameter> hostParamList = new List<Parameter>();
-                            foreach (var swaggerParameter in swaggerParams)
-                            {
-                                // Build parameter
-                                var modeler = new SwaggerModeler(Settings.Instance);
-                                modeler.ServiceDefinition = serviceDefinition;
-                                modeler.CodeModel = codeModel;
-                                var parameterBuilder = new ParameterBuilder(swaggerParameter, modeler);
-                                var parameter = parameterBuilder.Build();
-
-                                // check to see if the parameter exists in properties, and needs to have its name normalized
-                                if (codeModel.Properties.Any(p => p.SerializedName.EqualsIgnoreCase(parameter.SerializedName)))
-                                {
-                                    parameter.ClientProperty =
-                                        codeModel.Properties.Single(
-                                            p => p.SerializedName.Equals(parameter.SerializedName));
-                                }
-                                parameter.Extensions["hostParameter"] = true;
-                                hostParamList.Add(parameter);
-                            }
-
-                            foreach (var method in codeModel.Methods)
-                            {
-                                if (position.EqualsIgnoreCase("first"))
-                                {
-                                    method.InsertRange(((IEnumerable<Parameter>)hostParamList).Reverse());
-                                }
-                                else
-                                {
-                                    method.AddRange(hostParamList);
-                                }
-
-                            }
-                            if (useSchemePrefix)
-                            {
-                                codeModel.BaseUrl = string.Format(CultureInfo.InvariantCulture, "{0}://{1}{2}",
-                                    serviceDefinition.Schemes[0].ToString().ToLowerInvariant(),
-                                    hostTemplate, serviceDefinition.BasePath);
-                            }
-                            else
-                            {
-                                codeModel.BaseUrl = string.Format(CultureInfo.InvariantCulture, "{0}{1}",
-                                    hostTemplate, serviceDefinition.BasePath);
-                            }
-
-                        }
-                    }
-                }
+                method.InsertRange(codeModel.HostParametersFront ?? Enumerable.Empty<Parameter>());
+                method.AddRange(codeModel.HostParametersBack ?? Enumerable.Empty<Parameter>());
             }
         }
 
