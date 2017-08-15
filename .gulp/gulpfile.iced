@@ -10,7 +10,7 @@ Tasks "dotnet"  # dotnet functions
 # Settings
 Import
   initialized: false
-  solution: "#{basefolder}/autorest.modeler.sln"
+  solution: "#{basefolder}/autorest.common.sln"
 
 # ==============================================================================
 # Tasks
@@ -26,7 +26,3 @@ task 'test', "more", ["regenerate"], (done) ->
   # echo "Testing More"
   done();
   
-# Regnerate files using autorest
-task 'regenerate', 'files', (done) ->
-  echo marked "#           Calling autorest.testserver/regenerate ..."
-  done();

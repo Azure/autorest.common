@@ -24,15 +24,18 @@
   },
   "homepage": "https://github.com/Azure/autorest.common/blob/master/README.md",
   "devDependencies": {
+    "coffee-script": "^1.11.1",
     "gulp": "^3.9.1",
     "gulp-filter": "^5.0.0",
-    "iced-coffee-script": "^108.0.11",
-    "shx": "^0.2.2",
-    "coffee-script": "^1.11.1",
-    "moment": "^2.17.1",
     "gulp-line-ending-corrector": "^1.0.1",
+    "iced-coffee-script": "^108.0.11",
+    "marked": "^0.3.6",
+    "marked-terminal": "^2.0.0",
+    "moment": "^2.17.1",
+    "run-sequence": "*",
+    "shx": "^0.2.2",
     "through2-parallel": "^0.1.3",
-    "run-sequence": "*"
+    "yargs": "^8.0.2"
   },
   "dependencies": {}
 }
