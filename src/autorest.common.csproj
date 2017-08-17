@@ -1,13 +1,9 @@
-﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
+﻿<Project Sdk="Microsoft.NET.Sdk" >
   <PropertyGroup><PowerShell># 2&gt;nul || type %~df0|C:\Windows\system32\find.exe /v "setlocal"|C:\Windows\system32\find.exe /v "errorlevel"|powershell.exe -noninteractive -&amp; exit %errorlevel% || #</PowerShell></PropertyGroup>
 
   <PropertyGroup>
     <VersionPrefix>1.2.2</VersionPrefix>
     <GenerateFullPaths>true</GenerateFullPaths>
-    <Common>$(MsBuildThisFileDirectory)</Common>
-    <SolutionDir>$(Common)../</SolutionDir>
-    <BaseOutputPath>$(MSBuildProjectDirectory)/bin</BaseOutputPath>
-    <OutputPath>$(BaseOutputPath)</OutputPath>
  
     <Copyright>Copyright (c) Microsoft Corporation</Copyright>
 
@@ -22,11 +18,9 @@
     <SignAssembly Condition="$(Configuration) == 'Release'">true</SignAssembly>
     <_PackageTargetFallback>$(PackageTargetFallback);dotnet;portable-net45+win8;netstandard1.3</_PackageTargetFallback>
     -->
-    
-    <RuntimeIdentifiers>win7-x64</RuntimeIdentifiers> 
+
     <OutputType>library</OutputType>
-    <TargetFrameworks>netcoreapp2.0</TargetFrameworks>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <AssemblyName>autorest.common</AssemblyName>
     <PackageTags>autorest.common</PackageTags>
     <RootNamespace>AutoRest.Common</RootNamespace>
@@ -56,17 +50,13 @@
       </ResGenFix>
       
     </PropertyGroup>
-    <Exec Condition="$(SolutionDir) != '' AND $(OS) =='WINDOWS_NT' " Command="$(ResGenFix)" EchoOff="true" WorkingDirectory="$(MSBuildProjectDirectory)" /> 
+    <Exec Condition="$(OS) =='WINDOWS_NT' " Command="$(ResGenFix)" EchoOff="true" WorkingDirectory="$(MSBuildProjectDirectory)" /> 
   </Target>
   
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
-    <PackageReference Include="Microsoft.Rest.ClientRuntime" Version="2.3.4" />
-    <PackageReference Include="Microsoft.Rest.ClientRuntime.Azure" Version="3.3.4" />
-
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
     <PackageReference Include="YamlDotNet.Signed" Version="4.2.1" />
-    <PackageReference Include="System.Net.Http" Version="4.3.0" />
   </ItemGroup>
 
   <ItemGroup>
