@@ -12,7 +12,7 @@ using AutoRest.Core.Utilities;
 
 namespace AutoRest
 {
-
+#if disabled
   public class AutoRestAsAsService
   {
     private Connection connection;
@@ -73,5 +73,5 @@ namespace AutoRest
       return false;
     }
   }
-
+#endif
 }

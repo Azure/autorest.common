@@ -59,10 +59,6 @@
     <Exec Condition="$(SolutionDir) != '' AND $(OS) =='WINDOWS_NT' " Command="$(ResGenFix)" EchoOff="true" WorkingDirectory="$(MSBuildProjectDirectory)" /> 
   </Target>
   
-  <ItemGroup>
-    <Compile Remove="AutoRestAsAService.cs" />
-    <Compile Remove="SwaggerParser.cs" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
