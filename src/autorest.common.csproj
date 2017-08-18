@@ -25,6 +25,8 @@
     <PackageTags>autorest.common</PackageTags>
     <RootNamespace>AutoRest.Common</RootNamespace>
  
+    <BaseOutputPath>$(MSBuildProjectDirectory)/bin</BaseOutputPath>
+    <OutputPath>$(BaseOutputPath)</OutputPath>
   </PropertyGroup>
 
   <Target Name="Nuke" AfterTargets="clean">
