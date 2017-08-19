@@ -122,7 +122,7 @@ namespace AutoRest.Core.Utilities
         {
             get
             {
-                dynamic a = typeof(Settings).GetAssembly();
+                var a = typeof(Settings).GetAssembly();
                 return Directory.GetParent(a.Location.ToString()).ToString();
             }
         }

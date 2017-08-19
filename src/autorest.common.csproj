@@ -4,6 +4,8 @@
   <PropertyGroup>
     <VersionPrefix>1.2.2</VersionPrefix>
     <GenerateFullPaths>true</GenerateFullPaths>
+    <Common>$(MsBuildThisFileDirectory)</Common>
+    <SolutionDir>$(Common)../</SolutionDir>
  
     <Copyright>Copyright (c) Microsoft Corporation</Copyright>
 
@@ -21,6 +23,7 @@
 
     <OutputType>library</OutputType>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>autorest.common</AssemblyName>
     <PackageTags>autorest.common</PackageTags>
     <RootNamespace>AutoRest.Common</RootNamespace>
@@ -57,7 +60,7 @@
   
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="8.0.1" />
     <PackageReference Include="YamlDotNet.Signed" Version="4.2.1" />
   </ItemGroup>
 
