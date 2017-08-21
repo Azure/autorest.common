@@ -150,6 +150,8 @@ namespace AutoRest.Core.Model
         /// </summary>
         public Dictionary<string, object> Extensions { get; private set; } = new Dictionary<string, object>();
 
+        public Dictionary<string, object> CodeGenExtensions { get; private set; } = new Dictionary<string, object>();
+
         /// <summary>
         /// Reference to the container of this type.
         /// </summary>
