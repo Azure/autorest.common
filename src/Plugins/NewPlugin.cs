@@ -96,7 +96,7 @@ public abstract class NewPlugin :  AutoRest.Core.IHost
         {
             if (!System.Diagnostics.Debugger.IsAttached)
             {
-                Console.Error.WriteLine($"Waiting for debugger to attach to {GetType().Name}");
+                Console.Error.WriteLine($"Waiting for debugger to attach to process {System.Diagnostics.Process.GetCurrentProcess().Id}");
             }
             while (!System.Diagnostics.Debugger.IsAttached)
             {
