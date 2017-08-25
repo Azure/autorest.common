@@ -94,16 +94,7 @@ public abstract class NewPlugin :  AutoRest.Core.IHost
     {
         if (true == await this.GetValue<bool?>("debugger"))
         {
-            if (!System.Diagnostics.Debugger.IsAttached)
-            {
-                Console.Error.WriteLine($"Waiting for debugger to attach to {GetType().Name}");
-            }
-            while (!System.Diagnostics.Debugger.IsAttached)
-            {
-                System.Threading.Thread.Sleep(100);
-                Console.Error.Write(".");
-            }
-            System.Diagnostics.Debugger.Break();
+            AutoRest.Core.Utilities.Debugger.Await();
         }
         try
         {

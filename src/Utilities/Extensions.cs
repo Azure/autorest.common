@@ -118,13 +118,10 @@ namespace AutoRest.Core.Utilities
         public static bool IsClass(this Type type) => type.GetTypeInfo().IsClass;
         public static Assembly GetAssembly(this Type type) => type.GetTypeInfo().Assembly;
 
-        public static string CodeBaseDirectory
+        public static string CodeBaseDirectory(Type type)
         {
-            get
-            {
-                dynamic a = typeof(Settings).GetAssembly();
-                return Directory.GetParent(a.Location.ToString()).ToString();
-            }
+            var a = GetAssembly(type);
+            return Directory.GetParent(a.Location.ToString()).ToString();
         }
 
         public static string ToTypesString(this Type[] types) => types?.Aggregate("", (current, type) => $"{current}, {type?.FullName ?? "�null�" }").Trim(',') ?? "";
