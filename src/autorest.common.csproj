@@ -79,7 +79,7 @@
     </EmbeddedResource>
   </ItemGroup>
 
-  <Target Name="UpdateDepsJson" AfterTargets="AfterBuild" >
+  <Target Name="UpdateDepsJson" AfterTargets="GenerateBuildDependencyFile;Publish">
     <Message Text="Fixing deps.json" Importance="high" />
     <PropertyGroup>
       <ResGenFix>$(Powershell)
