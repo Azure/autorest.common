@@ -4,6 +4,7 @@
     <VersionPrefix>1.2.2</VersionPrefix>
     <GenerateFullPaths>true</GenerateFullPaths>
     <IsPackable>false</IsPackable>
+    <SolutionDir>$(Common)../</SolutionDir>
 
     <_PackageTargetFallback>$(PackageTargetFallback);dotnet;portable-net45+win8;netstandard1.3</_PackageTargetFallback>
     <OutputType>Exe</OutputType>
