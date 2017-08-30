@@ -13,7 +13,7 @@ namespace Microsoft.Perks.JsonRPC
 {
     public class Connection : IDisposable
     {
-        private TextWriter _writer;
+        private Stream _writer;
         private PeekingBinaryReader _reader;
         private bool _isDisposed = false;
         private int _requestId;
@@ -23,7 +23,7 @@ namespace Microsoft.Perks.JsonRPC
 
         public event Action<string> OnDebug;
 
-        public Connection(TextWriter writer, Stream input)
+        public Connection(Stream writer, Stream input)
         {
             _writer = writer;
             _reader = new PeekingBinaryReader(input);
@@ -338,11 +338,14 @@ namespace Microsoft.Perks.JsonRPC
         private async Task Send(string text)
         {
             _streamReady.WaitOne();
-            
-            await _writer.WriteAsync($"Content-Length: {Encoding.UTF8.GetByteCount(text)}\r\n\r\n");
-            await _writer.WriteAsync(text);
+
+            var buffer = Encoding.UTF8.GetBytes(text);
+            await Write(Encoding.ASCII.GetBytes($"Content-Length: {buffer.Length}\r\n\r\n"));
+            await Write(buffer);
+
             _streamReady.Release();
         }
+        private Task Write(byte[] buffer) => _writer.WriteAsync(buffer, 0, buffer.Length);
 
         public async Task SendError(string id, int code, string message)
         {
