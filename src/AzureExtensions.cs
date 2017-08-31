@@ -460,7 +460,7 @@ namespace AutoRest.Extensions.Azure
             
             var parameterGroupType = New <CompositeType>(parameterGroupName, new
             {
-                Documentation = "Additional parameters for the " + method.Name + " operation."
+                Documentation = "Additional parameters for " + GetMethodNameFromOperationId(method.Name) + " operation."
             });
 
             //Add to the service client
@@ -484,6 +484,9 @@ namespace AutoRest.Extensions.Azure
                 Documentation = "Additional parameters for the operation"
             });
         }
+
+        public static string GetMethodNameFromOperationId(string operationId) => 
+            (operationId?.IndexOf('_') != -1) ? operationId.Split('_').Last(): operationId;
 
         public static void ProcessClientRequestIdExtension(CodeModel codeModel)
         {
