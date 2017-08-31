@@ -81,18 +81,20 @@ public abstract class NewPlugin :  AutoRest.Core.IHost
     public void Message(Message message) => _connection.Notify("Message", _sessionId, message);
     public void WriteFile(string filename, string content, object sourcemap) => _connection.Notify("WriteFile", _sessionId, filename, content, sourcemap);
 
-    protected string _sessionId;
     private Connection _connection;
+    protected string Plugin { get; private set; }
+    protected string _sessionId;
 
-    public NewPlugin(Connection connection, string sessionId)
+    public NewPlugin(Connection connection, string plugin, string sessionId)
     {
-        _sessionId = sessionId;
         _connection = connection;
+        Plugin = plugin;
+        _sessionId = sessionId;
     }
 
     public async Task<bool> Process()
     {
-        if (true == await this.GetValue<bool?>("debugger"))
+        if (true == await this.GetValue<bool?>($"{Plugin}.debugger"))
         {
             AutoRest.Core.Utilities.Debugger.Await();
         }
