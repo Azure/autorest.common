@@ -12,7 +12,9 @@ namespace AutoRest.Core.Utilities
         {
             if (!System.Diagnostics.Debugger.IsAttached)
             {
+                Console.Error.WriteLine();
                 Console.Error.WriteLine($"Waiting for debugger to attach to process {System.Diagnostics.Process.GetCurrentProcess().Id}");
+                Console.Error.WriteLine();
             }
             while (!System.Diagnostics.Debugger.IsAttached)
             {
