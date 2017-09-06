@@ -67,6 +67,9 @@ namespace AutoRest.Extensions.Azure
                     throw new ArgumentNullException("codeModel");
                 }
 
+                // This extension from general extensions must be run prior to Azure specific extensions.
+                ProcessParameterizedHost(codeModel);
+
                 ProcessClientRequestIdExtension(codeModel);
                 UpdateHeadMethods(codeModel);
                 ParseODataExtension(codeModel);
