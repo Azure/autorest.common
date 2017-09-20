@@ -70,5 +70,13 @@ namespace AutoRest.Core.Model
         [JsonIgnore]
         public override string ExtendedDocumentation
             => $"Possible values include: {string.Join(", ", Values.Select(v => $"'{v.Name}'"))}";
+        
+        /// <summary>
+        /// The underlying type of a property or a parameter on which the
+        /// enum constraint or x-ms-enum extension is applied. This enables support
+        /// for enums of other primary types like Integer, Decimal, Boolean apart 
+        //  from string.
+        /// </summary>
+        public PrimaryType UnderlyingType { get; set; }
     }
 }
