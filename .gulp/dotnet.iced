@@ -31,8 +31,8 @@ dotnet = (cmd) ->
 # Tasks
 
 
-task 'build','dotnet',['restore'], (done) ->
-  execute "dotnet build -c #{configuration} #{solution} /nologo /clp:NoSummary", (code, stdout, stderr) ->
+task 'build','dotnet',['restore', 'version-number'], (done) ->
+  execute "dotnet build -c #{configuration} #{solution} /nologo /clp:NoSummary /p:VersionPrefix=#{version}", (code, stdout, stderr) ->
     done()
 
 task 'restore','restores the dotnet packages for the projects', (done) -> 

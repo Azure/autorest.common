@@ -4,9 +4,11 @@
   "description": "The common module for AutoRest Extensions",
   "scripts": {
     "test": "gulp test",
+    "testci": "gulp test",
     "build": "gulp build",
     "clean": "gulp clean",
     "postinstall": "gulp restore",
+    "publish-preview": "echo NOT YET AUTOMATED",
     "nuke": "git clean -xdf",
     "prepublishOnly": "I am a syntax error that prevents you from accidentally publishing this on npm. This package is published on Nuget!"
   },
