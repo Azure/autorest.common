@@ -90,7 +90,9 @@ namespace AutoRest.Core
 
             if (singleFile)
             {
-                await Write(string.Join("\n\n", outputs.Select(output => output.Item4)), Settings.Instance.OutputFileName);
+                var outputFileName = Settings.Instance.OutputFileName;
+                Settings.Instance.OutputFileName = null; // prevent misleading error inside `Write` about single file output not being supported...
+                await Write(string.Join("\n\n", outputs.Select(output => output.Item4)), outputFileName);
             }
             else
             {
