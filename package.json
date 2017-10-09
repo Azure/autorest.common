@@ -28,7 +28,7 @@
   "homepage": "https://github.com/Azure/autorest.common/blob/master/README.md",
   "devDependencies": {
     "coffee-script": "^1.11.1",
-    "dotnet-sdk-2.0.0": "^1.1.1",
+    "dotnet-sdk-2.0.0": "^1.4.4",
     "gulp": "^3.9.1",
     "gulp-filter": "^5.0.0",
     "gulp-line-ending-corrector": "^1.0.1",
