@@ -39,16 +39,16 @@ namespace Microsoft.Perks.JsonRPC
         public bool SetCompleted(JToken result)
         {
             T value;
-            bool trueLikeValue = obj != null && !0.Equals(obj) && !false.Equals(obj) && !"".Equals(obj);
+            Func<object, bool> trueLikeValue = obj => obj != null && !0.Equals(obj) && !false.Equals(obj) && !"".Equals(obj);
             if (typeof(T) == typeof(bool))
             {
                 var obj = result.ToObject<object>();
-                value = (T)(object)(trueLikeValue);
+                value = (T)(object)(trueLikeValue(obj));
             }
             else if (typeof(T) == typeof(bool?))
             {
                 var obj = result.ToObject<object>();
-                value = obj == null ? (T)(object)(null) : (T)(object)(trueLikeValue);
+                value = obj == null ? (T)(object)(null) : (T)(object)(trueLikeValue(obj));
             }
             else
             {
