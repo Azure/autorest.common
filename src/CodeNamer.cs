@@ -456,7 +456,7 @@ namespace AutoRest.Core
                     desiredName));
             }
 
-            if (ReservedWords.Contains(desiredName))
+            if (ReservedWords.Contains(desiredName, StringComparer.OrdinalIgnoreCase))
             {
                 return desiredName;
             }
