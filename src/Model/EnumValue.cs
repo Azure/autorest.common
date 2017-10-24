@@ -59,6 +59,12 @@ namespace AutoRest.Core.Model
             }
         }
 
+        
+        /// <summary>
+        /// Gets or sets the allowed alternative values for each enum value. 
+        /// </summary>
+        public List<string> AllowedValues;
+
         public virtual HashSet<string> LocallyUsedNames => null;
 
         [JsonIgnore]
