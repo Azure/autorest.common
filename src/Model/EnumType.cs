@@ -37,6 +37,11 @@ namespace AutoRest.Core.Model
         /// </summary>
         public List<EnumValue> Values { get; private set; }
 
+        /// <summary>
+        /// Whether the enum should be modeled as extensible or not
+        /// </summary>
+        public bool ModelAsExtensible;
+
         public void SetName(string name)
         {
             Name = name;
