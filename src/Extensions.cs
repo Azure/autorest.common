@@ -3,6 +3,7 @@
 
 using System;
 using System.Globalization;
+using System.Linq;
 using System.Net;
 using AutoRest.Core.Model;
 
@@ -51,16 +52,7 @@ namespace AutoRest.Swagger
         /// </summary>
         /// <param name="reference">Definition reference.</param>
         /// <returns>Definition name with path.</returns>
-        public static string StripDefinitionPath(this string reference)
-        {
-            if (reference != null && reference.Contains("#/definitions/"))
-            {
-                reference = reference.Substring(reference.IndexOf("#/definitions/", StringComparison.OrdinalIgnoreCase) +
-                    "#/definitions/".Length);
-            }
-
-            return reference;
-        }
+        public static string StripDefinitionPath(this string reference) => reference.Split('/').Last();
 
         /// <summary>
         /// Removes #/parameters/ or url#/parameters from the reference path.

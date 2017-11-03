@@ -148,22 +148,6 @@ namespace AutoRest.Extensions.Azure
         }
 
         /// <summary>
-        /// Removes #/definitions/ or url#/definitions from the reference path.
-        /// </summary>
-        /// <param name="reference">Definition reference.</param>
-        /// <returns>Definition name with path.</returns>
-        public static string StripDefinitionPath(string reference)
-        {
-            if (reference != null && reference.Contains("#/definitions/"))
-            {
-                reference = reference.Substring(reference.IndexOf("#/definitions/", StringComparison.OrdinalIgnoreCase) +
-                    "#/definitions/".Length);
-            }
-
-            return reference;
-        }
-
-        /// <summary>
         /// Converts Azure Parameters to regular parameters.
         /// </summary>
         /// <param name="codeModelient">Service client</param>
@@ -184,7 +168,7 @@ namespace AutoRest.Extensions.Azure
                         Resources.ODataEmpty, ODataExtension));
                 }
 
-                odataModelPath = StripDefinitionPath(odataModelPath);
+                odataModelPath = AutoRest.Swagger.Extensions.StripDefinitionPath(odataModelPath);
 
                 CompositeType odataType = codeModel.ModelTypes
                     .FirstOrDefault(t => t.Name.EqualsIgnoreCase(odataModelPath));
