@@ -255,7 +255,7 @@ namespace AutoRest.Extensions
             string propertyName = property.SerializedName;
             if (escapePropertyName)
             {
-                propertyName = propertyName.Replace(".", "\\\\.")?.Replace("\\\\\\\\", "\\\\");
+                propertyName = propertyName?.Replace(".", "\\\\.").Replace("\\\\\\\\", "\\\\");
             }
             property.SerializedName = basePath + "." + propertyName;
             return property;
