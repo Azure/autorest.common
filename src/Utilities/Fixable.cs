@@ -128,7 +128,7 @@ namespace AutoRest.Core.Utilities
             return false;
         }
 
-        public override int GetHashCode() => Value.GetHashCode();
+        public override int GetHashCode() => Value?.GetHashCode() ?? 0;
 
 
         public Fixable()
