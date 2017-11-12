@@ -10,16 +10,19 @@ namespace AutoRest.Core.Utilities
     {
         public static void Await()
         {
-            if (!System.Diagnostics.Debugger.IsAttached)
-            {
-                Console.Error.WriteLine();
-                Console.Error.WriteLine($"Waiting for debugger to attach to process {System.Diagnostics.Process.GetCurrentProcess().Id}");
-                Console.Error.WriteLine();
-            }
             while (!System.Diagnostics.Debugger.IsAttached)
             {
-                System.Threading.Thread.Sleep(100);
-                Console.Error.Write(".");
+                Console.Error.WriteLine($"Waiting for debugger to attach to process {System.Diagnostics.Process.GetCurrentProcess().Id}");
+                for (int i = 0; i < 50; i++)
+                {
+                    if (System.Diagnostics.Debugger.IsAttached)
+                    {
+                        break;
+                    }
+                    System.Threading.Thread.Sleep(100);
+                    Console.Error.Write(".");
+                }
+                Console.Error.WriteLine();
             }
             System.Diagnostics.Debugger.Break();
         }
