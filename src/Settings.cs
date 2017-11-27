@@ -73,7 +73,6 @@ Licensed under the MIT License. See License.txt in the project root for license 
 
             FileSystemInput = new MemoryFileSystem();
             FileSystemOutput = new MemoryFileSystem();
-            OutputDirectory = Path.Combine(Directory.GetCurrentDirectory(), "Generated");
             CustomSettings = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
             Header = string.Format(CultureInfo.InvariantCulture, DefaultCodeGenerationHeaderWithoutVersion, Settings.Version);
             CodeGenerator = "CSharp";
@@ -120,11 +119,6 @@ Licensed under the MIT License. See License.txt in the project root for license 
         /// Gets or sets a base namespace for generated code.
         /// </summary>
         public string Namespace { get; set; }
-
-        /// <summary>
-        /// Gets or sets the output directory for generated files. If not specified, uses 'Generated' as the default.
-        /// </summary>
-        public string OutputDirectory { get; set; }
 
         /// <summary>
         /// Gets or sets the code generation language.

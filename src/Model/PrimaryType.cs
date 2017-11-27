@@ -27,7 +27,9 @@ namespace AutoRest.Core.Model
             Name = KnownPrimaryType.ToString();
         }
 
+        [JsonIgnore]
         public override IEnumerable<IChild> Children => Enumerable.Empty<IChild>();
+
         [JsonIgnore]
         public override string Qualifier => "PrimaryType";
 
