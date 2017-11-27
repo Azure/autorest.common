@@ -65,6 +65,7 @@ namespace AutoRest.Core.Model
         /// </summary>
         public List<string> AllowedValues = new List<string>();
 
+        [JsonIgnore]
         public virtual HashSet<string> LocallyUsedNames => null;
 
         [JsonIgnore]

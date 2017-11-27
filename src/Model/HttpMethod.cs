@@ -8,7 +8,6 @@ namespace AutoRest.Core.Model
     /// </summary>
     public enum HttpMethod
     {
-        None = 0,
         Get,
         Post,
         Put,

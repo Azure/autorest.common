@@ -75,6 +75,7 @@ namespace AutoRest.Core.Model
             set { _typeName.CopyFrom(value); }
         }
 
+        [JsonIgnore]
         public virtual HashSet<string> LocallyUsedNames => null;
 
         /// <Summary>
