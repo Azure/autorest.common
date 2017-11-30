@@ -55,6 +55,8 @@ namespace AutoRest.Core.Model
         /// <param name="other">The object to compare with this object.</param>
         /// <returns>true if the specified object is functionally equal to this object; otherwise, false.</returns>
         bool StructurallyEquals(IModelType other);
+
+        bool Deprecated { get; set; }
         
         XmlProperties XmlProperties { get; set; }
 
@@ -197,7 +199,9 @@ namespace AutoRest.Core.Model
         public virtual IEnumerable<IIdentifier> IdentifiersInScope => this.SingleItemConcat(Parent?.IdentifiersInScope);
         [JsonIgnore]
         public virtual IEnumerable<IChild> Children => Enumerable.Empty<IChild>();
-        
+
+        public bool Deprecated { get; set; }
+
         public XmlProperties XmlProperties { get; set; }
 
         [JsonIgnore]

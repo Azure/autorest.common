@@ -72,6 +72,8 @@ namespace AutoRest.Core.Model
             set { _defaultValue.CopyFrom(value); }
         }
 
+        public bool Deprecated { get; set; }
+
         /// <summary>
         /// Gets or sets the documentation.
         /// </summary>
