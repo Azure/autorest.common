@@ -12,22 +12,6 @@ namespace AutoRest.Core.Utilities.Collections
 {
     public static class LinqExtensions
     {
-        /// <summary>
-        ///     Returns a ReEnumerable wrapper around the collection which timidly (cautiously) pulls items
-        ///     but still allows you to to re-enumerate without re-running the query.
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="collection"></param>
-        /// <returns></returns>
-        public static MutableEnumerable<T> ReEnumerable<T>(this IEnumerable<T> collection)
-        {
-            if (collection == null)
-            {
-                return new ReEnumerable<T>(Enumerable.Empty<T>());
-            }
-            return collection as MutableEnumerable<T> ?? new ReEnumerable<T>(collection);
-        }
-
         public static TValue AddOrSet<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, TValue value)
         {
             lock (dictionary)
@@ -52,9 +36,9 @@ namespace AutoRest.Core.Utilities.Collections
         /// <param name="item"></param>
         /// <returns></returns>
         public static IEnumerable<T> ConcatSingleItem<T>(this IEnumerable<T> enumerable, T item) => (enumerable ?? Enumerable.Empty<T>()).Concat(item.SingleItemAsEnumerable());
-        public static IEnumerable<T> SingleItemConcat<T>(this T item, IEnumerable<T> enumerable) => item.SingleItemAsEnumerable() .Concat(enumerable ?? Enumerable.Empty<T>());
+        internal static IEnumerable<T> SingleItemConcat<T>(this T item, IEnumerable<T> enumerable) => item.SingleItemAsEnumerable() .Concat(enumerable ?? Enumerable.Empty<T>());
 
-        public static IEnumerable<T> WhereNotNull<T>(this IEnumerable<T> enumerable) => enumerable?.Where(each => each != null) ?? Enumerable.Empty<T>();
+        internal static IEnumerable<T> WhereNotNull<T>(this IEnumerable<T> enumerable) => enumerable?.Where(each => each != null) ?? Enumerable.Empty<T>();
 
         public static IEnumerable<TResult> SelectMany<TResult>(this IDictionary source, Func<object,object,IEnumerable<TResult>> selector)
         {

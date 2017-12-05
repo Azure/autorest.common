@@ -40,10 +40,10 @@ namespace AutoRest.Core.Model
         public IEnumerable<Parameter> HostParametersBack { get; set; }
 
         [JsonIgnore]
-        public IEnumerable<CompositeType> AllModelTypes => ModelTypes.Union(HeaderTypes).Union(ErrorTypes).ReEnumerable();
+        public IEnumerable<CompositeType> AllModelTypes => ModelTypes.Union(HeaderTypes).Union(ErrorTypes);
 
         [JsonIgnore]
-        public virtual IEnumerableWithIndex<Method> Methods => new ReEnumerable<Method>(Operations.SelectMany(group => group.Methods));
+        public virtual IEnumerable<Method> Methods => Operations.SelectMany(group => group.Methods);
 
         public virtual Method Add(Method method)
         {
@@ -87,7 +87,7 @@ namespace AutoRest.Core.Model
         /// </summary>
         public virtual string Namespace
         {
-            get { return _namespace; }
+            get => _namespace;
             set
             {
                 if (string.IsNullOrWhiteSpace(_namespace))
@@ -106,8 +106,8 @@ namespace AutoRest.Core.Model
         /// </summary>
         public virtual string ModelsName
         {
-            get { return _modelsName; }
-            set { _modelsName = CodeNamer.Instance.GetNamespaceName(value); }
+            get => _modelsName;
+            set => _modelsName = CodeNamer.Instance.GetNamespaceName(value);
         }
 
         /// <summary>
@@ -135,7 +135,7 @@ namespace AutoRest.Core.Model
         /// </summary>
         public string Documentation
         {
-            get { return _documentation; }
+            get => _documentation;
             set
             {
                 if (string.IsNullOrWhiteSpace(_documentation))
