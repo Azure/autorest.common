@@ -236,7 +236,7 @@ namespace AutoRest.Core.Model
         public virtual bool IsXNullableReturnType => Responses.Keys.Any(key => Responses[key].IsNullable);
 
 
-        [JsonProperty("implementation")]
+        [JsonProperty]
         private Dictionary<string, string> Implementation { get; set; }
 
         public string GetImplementation(string language) =>
@@ -246,6 +246,7 @@ namespace AutoRest.Core.Model
 
         public Method ForwardTo { get; set; }
 
+        [JsonIgnore]
         public MethodFlavor Flavor =>
             this.Implementation != null ? MethodFlavor.Implementation :
             this.ForwardTo != null ? MethodFlavor.ForwardTo :
