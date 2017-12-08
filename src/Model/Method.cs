@@ -14,6 +14,16 @@ using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Core.Model
 {
+    public enum MethodFlavor
+    {
+        // default/regular (Implementation == null && ForwardTo == null && Url != null)
+        RestCall,
+        // forward to other method (Implementation == null && ForwardTo != null), parameters are significant (match by wirename - since displayname can be overridden)
+        ForwardTo,
+        // just paste the implementation (Implementation != null)
+        Implementation,
+    }
+
     /// <summary>
     /// Defines a method for the client model.
     /// </summary>
@@ -102,8 +112,6 @@ namespace AutoRest.Core.Model
         [SuppressMessage("Microsoft.Design", "CA1056:UriPropertiesShouldNotBeStrings",
             Justification = "Url might be used as a template, thus making it invalid url in certain scenarios.")]
         public virtual string Url { get; set; }
-
-
 
         /// <summary>
         /// Indicates whether the HTTP url is absolute.
@@ -225,7 +233,22 @@ namespace AutoRest.Core.Model
         public virtual HashSet<string> LocallyUsedNames { get; } = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 
         [JsonIgnore]
-        public virtual bool IsXNullableReturnType { get { return (Responses.Keys.Any(key => Responses[key].IsNullable)); } }
-       
+        public virtual bool IsXNullableReturnType => Responses.Keys.Any(key => Responses[key].IsNullable);
+
+
+        [JsonProperty("implementation")]
+        private Dictionary<string, string> Implementation { get; set; }
+
+        public string GetImplementation(string language) =>
+            Implementation == null ? null :
+            Implementation.ContainsKey(language) ? Implementation[language] :
+            Implementation.ContainsKey("") ? Implementation[""] : null;
+
+        public Method ForwardTo { get; set; }
+
+        public MethodFlavor Flavor =>
+            this.Implementation != null ? MethodFlavor.Implementation :
+            this.ForwardTo != null ? MethodFlavor.ForwardTo :
+            MethodFlavor.RestCall;
     }
 }
