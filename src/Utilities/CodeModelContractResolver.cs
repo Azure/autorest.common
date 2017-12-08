@@ -148,7 +148,7 @@ namespace AutoRest.Core.Utilities
                         enumerable = instance
                             .GetType()
                             .GetProperty(member.Name)
-                            .GetValue(instance, null) as IEnumerable;
+                            ?.GetValue(instance, null) as IEnumerable;
                     }
                     if( member is FieldInfo ) { 
                             enumerable = instance
