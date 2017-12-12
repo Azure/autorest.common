@@ -38,9 +38,9 @@ namespace AutoRest.Core.Model
         public List<EnumValue> Values { get; private set; }
 
         /// <summary>
-        /// Whether the enum should be modeled as extensible or not
+        /// Whether the enum should be modeled as legacy modelAsString implementation
         /// </summary>
-        public bool ModelAsExtensible;
+        public bool OldModelAsString;
 
         public void SetName(string name)
         {
