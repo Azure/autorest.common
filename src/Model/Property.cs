@@ -10,6 +10,14 @@ using Newtonsoft.Json.Linq;
 
 namespace AutoRest.Core.Model
 {
+    public enum PropertyFlavor
+    {
+        Regular,
+        AdditionalProperties,
+        ForwardTo,
+        Implementation,
+    }
+
     /// <summary>
     ///     Defines model properties.
     /// </summary>
@@ -126,5 +134,23 @@ namespace AutoRest.Core.Model
         public bool XmlIsWrapped => XmlProperties?.Wrapped ?? ModelType.XmlIsWrapped;
         [JsonIgnore]
         public bool XmlIsAttribute => XmlProperties?.Attribute ?? ModelType.XmlIsAttribute;
+
+        [JsonProperty]
+        public Dictionary<string, string> Implementation { get; set; }
+
+        public string GetImplementation(string language) =>
+            Implementation == null ? null :
+            Implementation.ContainsKey(language) ? Implementation[language] :
+            Implementation.ContainsKey("") ? Implementation[""] : null;
+
+        [JsonProperty]
+        public Property ForwardTo { get; set; }
+
+        [JsonIgnore]
+        public PropertyFlavor Flavor =>
+            this.ForwardTo != null ? PropertyFlavor.ForwardTo :
+            (this.ModelType as DictionaryType)?.SupportsAdditionalProperties == true ? PropertyFlavor.AdditionalProperties :
+            this.SerializedName == null ? PropertyFlavor.Implementation :
+            PropertyFlavor.Regular;
     }
 }

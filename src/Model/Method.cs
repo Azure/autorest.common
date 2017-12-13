@@ -20,7 +20,7 @@ namespace AutoRest.Core.Model
         RestCall,
         // forward to other method (Implementation == null && ForwardTo != null), parameters are significant (match by wirename - since displayname can be overridden)
         ForwardTo,
-        // just paste the implementation (Implementation != null)
+        // just paste the implementation (Implementation property may be null, meaning stub body)
         Implementation,
     }
 
@@ -237,19 +237,20 @@ namespace AutoRest.Core.Model
 
 
         [JsonProperty]
-        private Dictionary<string, string> Implementation { get; set; }
+        public Dictionary<string, string> Implementation { get; set; }
 
         public string GetImplementation(string language) =>
             Implementation == null ? null :
             Implementation.ContainsKey(language) ? Implementation[language] :
             Implementation.ContainsKey("") ? Implementation[""] : null;
 
+        [JsonProperty]
         public Method ForwardTo { get; set; }
 
         [JsonIgnore]
         public MethodFlavor Flavor =>
-            this.Implementation != null ? MethodFlavor.Implementation :
             this.ForwardTo != null ? MethodFlavor.ForwardTo :
+            this.Url == null ? MethodFlavor.Implementation :
             MethodFlavor.RestCall;
     }
 }
