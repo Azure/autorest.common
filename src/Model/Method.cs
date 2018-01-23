@@ -207,10 +207,12 @@ namespace AutoRest.Core.Model
         /// </summary>
         public Dictionary<string, object> Extensions { get; private set; } = new Dictionary<string, object>();
 
+        public string DeprecationMessage { get; set; }
+
         /// <summary>
         /// Indicates if the method is deprecated.
         /// </summary>
-        public bool Deprecated { get; set; }
+        public bool Deprecated => DeprecationMessage != null;
         
         /// <summary>
         /// Indicates if the method is supposed to be hidden from end-users.
