@@ -5,8 +5,8 @@
     <PackageId>Microsoft.AutoRest.Common</PackageId>
     <AssemblyName>Microsoft.AutoRest.Common</AssemblyName>
     <AssemnblyTitle>Microsoft AutoRest Common</AssemnblyTitle>
-    <Version>2.4.37</Version>
-    <Description>PLEASE PROVIDE DESCRIPTION about your pacakge</Description>
+    <Version>1.0.0</Version>
+    <Description>Common code shared between AutoRest modeler and code generators</Description>
     <Copyright>© Microsoft Corporation. All rights reserved.</Copyright>
     <Authors>Microsoft</Authors>
     <Owners>Microsoft, azure-sdk</Owners>
@@ -18,11 +18,9 @@
     <PackageTags>autorest.common;AutoRest</PackageTags>
     <PacakgeReleaseNotes>
       <![CDATA[
-        1. Current Release specific notes
+        1. Provides common code
       ]]>
     </PacakgeReleaseNotes>
-  </PropertyGroup>
-  <PropertyGroup>
     <GenerateFullPaths>true</GenerateFullPaths>
     <Common>$(MsBuildThisFileDirectory)</Common>
     <SolutionDir>$(Common)../</SolutionDir> 
