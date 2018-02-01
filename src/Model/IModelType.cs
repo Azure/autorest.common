@@ -56,7 +56,7 @@ namespace AutoRest.Core.Model
         /// <returns>true if the specified object is functionally equal to this object; otherwise, false.</returns>
         bool StructurallyEquals(IModelType other);
 
-        string DeprecationMessage { get; }
+        string DeprecationMessage { get; set; }
         bool Deprecated { get; }
         
         XmlProperties XmlProperties { get; set; }
