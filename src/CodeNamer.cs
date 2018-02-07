@@ -12,7 +12,6 @@ using AutoRest.Core.Utilities;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities.Collections;
 using static AutoRest.Core.Utilities.DependencyInjection;
-using AutoRest.Common.Properties;
 
 namespace AutoRest.Core
 {
@@ -400,7 +399,7 @@ namespace AutoRest.Core
             // if it is still empty string, throw
             if (correctName.IsNullOrEmpty())
             {
-                throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, Resources.InvalidIdentifierName,
+                throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, "Property name {0} cannot be used as an Identifier, as it contains only invalid characters.",
                     name));
             }
 
@@ -452,7 +451,7 @@ namespace AutoRest.Core
             if (string.IsNullOrWhiteSpace(desiredName))
             {
                 // should have never got to this point with an blank name. 
-                throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, Resources.InvalidIdentifierName,
+                throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, "Property name {0} cannot be used as an Identifier, as it contains only invalid characters.",
                     desiredName));
             }
 
@@ -533,9 +532,6 @@ namespace AutoRest.Core
             while (null != (confl = IsNameAvailable(desiredName, names)))
             {
                 desiredName += whoIsAsking.Qualifier;
-                // todo: gws: log the name change because there was something else named that.
-                // Singleton<Log>.Instance?.Add(new Message {Text = $"todo:{confl}"});
-                // reason = string.Format(CultureInfo.InvariantCulture, Resources.NamespaceConflictReasonMessage,desiredName, ...?
             }
 
 

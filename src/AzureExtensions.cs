@@ -15,7 +15,6 @@ using AutoRest.Extensions.Azure.Model;
 using Newtonsoft.Json;
 using ParameterLocation = AutoRest.Core.Model.ParameterLocation;
 using static AutoRest.Core.Utilities.DependencyInjection;
-using AutoRest.Common.Properties;
 
 namespace AutoRest.Extensions.Azure
 {
@@ -108,7 +107,7 @@ namespace AutoRest.Extensions.Azure
                 }
                 else
                 {
-                    Logger.Instance.Log(Category.Warning, Resources.HeadMethodPossibleIncorrectSpecification, method.Name);
+                    Logger.Instance.Log(Category.Warning, "HEAD '{0}' method missing 404 status code section -- this might be unintentional.", method.Name);
                 }
             }
         }
@@ -165,7 +164,7 @@ namespace AutoRest.Extensions.Azure
                 {
                     throw new InvalidOperationException(
                         string.Format(CultureInfo.InvariantCulture, 
-                        Resources.ODataEmpty, ODataExtension));
+                        "{0} needs to have a value.", ODataExtension));
                 }
 
                 odataModelPath = AutoRest.Swagger.Extensions.StripDefinitionPath(odataModelPath);
@@ -177,7 +176,7 @@ namespace AutoRest.Extensions.Azure
                 {
                     throw new InvalidOperationException(
                         string.Format(CultureInfo.InvariantCulture, 
-                        Resources.ODataInvalidReferance, ODataExtension));
+                        "{0} needs to have a valid definition reference.", ODataExtension));
                 }
                 var filterParameter = method.Parameters
                     .FirstOrDefault(p => p.Location == ParameterLocation.Query &&
@@ -186,7 +185,7 @@ namespace AutoRest.Extensions.Azure
                 {
                     throw new InvalidOperationException(
                         string.Format(CultureInfo.InvariantCulture, 
-                        Resources.ODataFilterMissing, ODataExtension));
+                        "Method with {0} needs to have \"$filter\" parameter.", ODataExtension));
                 }
 
                 filterParameter.ModelType = odataType;

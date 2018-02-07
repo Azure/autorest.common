@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 using AutoRest.Core.Utilities;
 using Newtonsoft.Json.Linq;
 using static AutoRest.Core.Utilities.DependencyInjection;
-using AutoRest.Common.Properties;
 
 namespace AutoRest.Core
 {
@@ -275,7 +274,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
                         }
                         catch (Exception exception)
                         {
-                            throw new ArgumentException(String.Format(CultureInfo.InvariantCulture, Resources.ParameterValueIsNotValid,
+                            throw new ArgumentException(String.Format(CultureInfo.InvariantCulture, "Parameter '{0}' value is not valid. Expect '{1}'",
                                 setting.Key, property.GetType().Name), exception);
                         }
                     }
