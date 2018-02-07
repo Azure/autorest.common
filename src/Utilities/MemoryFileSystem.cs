@@ -33,7 +33,7 @@ namespace AutoRest.Core.Utilities
         {
             if (string.IsNullOrWhiteSpace(path))
             {
-                throw new Exception(Resources.PathCannotBeNullOrEmpty);
+                throw new Exception("path cannot be null or an empty string or a string with white spaces while getting the parent directory");
             }
             if (IsCompletePath(path))
             {
