@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 using AutoRest.Core.Utilities;
 using Newtonsoft.Json.Linq;
 using static AutoRest.Core.Utilities.DependencyInjection;
-using AutoRest.Common.Properties;
 
 namespace AutoRest.Core
 {

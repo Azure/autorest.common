@@ -15,7 +15,6 @@ using AutoRest.Extensions.Azure.Model;
 using Newtonsoft.Json;
 using ParameterLocation = AutoRest.Core.Model.ParameterLocation;
 using static AutoRest.Core.Utilities.DependencyInjection;
-using AutoRest.Common.Properties;
 
 namespace AutoRest.Extensions.Azure
 {
@@ -186,7 +185,7 @@ namespace AutoRest.Extensions.Azure
                 {
                     throw new InvalidOperationException(
                         string.Format(CultureInfo.InvariantCulture, 
-                        "Method with {0} needs to have "$filter" parameter.", ODataExtension));
+                        "Method with {0} needs to have \"$filter\" parameter.", ODataExtension));
                 }
 
                 filterParameter.ModelType = odataType;

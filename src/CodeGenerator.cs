@@ -12,7 +12,6 @@ using AutoRest.Core.Utilities;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Linq;
-using AutoRest.Common.Properties;
 
 namespace AutoRest.Core
 {
