@@ -12,7 +12,6 @@ using AutoRest.Core.Utilities;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Linq;
-using AutoRest.Common.Properties;
 
 namespace AutoRest.Core
 {
@@ -136,7 +135,7 @@ namespace AutoRest.Core
                 if (!IsSingleFileGenerationSupported)
                 {
                     Logger.Instance.Log(Category.Error, // new ArgumentException(Settings.Instance.OutputFileName),
-                        Resources.LanguageDoesNotSupportSingleFileGeneration, Settings.Instance.CodeGenerator);
+                        "'{0}' code generator does not support code generation to a single file.", Settings.Instance.CodeGenerator);
                     return;
                 }
 

@@ -33,5 +33,5 @@ task 'pack', 'Create the nuget package', ['build'], (done) ->
 task 'publish', 'publishes the package to nuget.org',['release-only','version-number'] ,(done)->
   # must be --release to publish the package 
   run ['pack'], ->
-    execute "#{basefolder}/tools/nuget.exe push #{basefolder}/src/bin/autorest.common.#{version}.nupkg #{nuget_apikey} -source nuget.org", (c,o,e) ->
+    execute "#{basefolder}/tools/nuget.exe push #{basefolder}/src/bin/Microsoft.AutoRest.Common.#{version}.nupkg -source https://www.nuget.org/api/v2/package/ -ApiKey #{nuget_apikey} -NonInteractive -Timeout 60", (c,o,e) ->
       done()

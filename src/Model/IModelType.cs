@@ -56,7 +56,8 @@ namespace AutoRest.Core.Model
         /// <returns>true if the specified object is functionally equal to this object; otherwise, false.</returns>
         bool StructurallyEquals(IModelType other);
 
-        bool Deprecated { get; set; }
+        string DeprecationMessage { get; set; }
+        bool Deprecated { get; }
         
         XmlProperties XmlProperties { get; set; }
 
@@ -200,7 +201,9 @@ namespace AutoRest.Core.Model
         [JsonIgnore]
         public virtual IEnumerable<IChild> Children => Enumerable.Empty<IChild>();
 
-        public bool Deprecated { get; set; }
+        public string DeprecationMessage { get; set; }
+
+        public bool Deprecated => DeprecationMessage != null;
 
         public XmlProperties XmlProperties { get; set; }
 

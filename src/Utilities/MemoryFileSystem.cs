@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using AutoRest.Common.Properties;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -33,7 +32,7 @@ namespace AutoRest.Core.Utilities
         {
             if (string.IsNullOrWhiteSpace(path))
             {
-                throw new Exception(Resources.PathCannotBeNullOrEmpty);
+                throw new Exception("path cannot be null or an empty string or a string with white spaces while getting the parent directory");
             }
             if (IsCompletePath(path))
             {
