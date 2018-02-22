@@ -38,9 +38,9 @@ namespace AutoRest.Core.Model
         public List<EnumValue> Values { get; private set; }
 
         /// <summary>
-        /// Whether the enum should be modeled as extensible or not
+        /// Whether the enum should be modeled as legacy modelAsString implementation
         /// </summary>
-        public bool ModelAsExtensible;
+        public bool OldModelAsString { get; set;}
 
         public void SetName(string name)
         {
@@ -53,7 +53,8 @@ namespace AutoRest.Core.Model
         public bool ModelAsString { get; set; }
 
         [JsonIgnore]
-        public override string DeclarationName => ModelAsString ? ModelAsStringType : base.DeclarationName;
+        public override string DeclarationName => string.IsNullOrEmpty(Name.FixedValue) || OldModelAsString? ModelAsStringType : base.DeclarationName;
+         
 
         /// <summary>
         /// Determines whether the specified model type is structurally equal to this object.
