@@ -384,7 +384,7 @@ module.exports.task 'release-only', '', (done)->
   done()
  
 configString = (s)->
-  "#{s.charAt 0 .toUpperCase()}#{s.slice 1 .toLowerCase() }"
+  "#{(s.charAt 0).toUpperCase()}#{(s.slice 1).toLowerCase() }"
 
 # bring current module into global namespace.
 Import module.exports
