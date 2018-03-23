@@ -28,6 +28,7 @@ namespace AutoRest.Core.Model
                     new DependencyInjectionJsonConverter<DictionaryType>(),
                     new DependencyInjectionJsonConverter<SequenceType>(),
                     new DependencyInjectionJsonConverter<PrimaryType>(),
+                    new DependencyInjectionJsonConverter<MultiType>(),
                     new DependencyInjectionJsonConverter<Method>(),
                     new DependencyInjectionJsonConverter<Parameter>(),
                     new DependencyInjectionJsonConverter<Property>(),
