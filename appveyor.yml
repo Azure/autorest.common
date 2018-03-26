@@ -1,0 +1,22 @@
+version: 2.2.{branch}.{build}
+skip_tags: true
+
+image:
+- Visual Studio 2017
+- Ubuntu
+
+environment:
+  nodejs_version: 8.9.10
+  DOTNET_SHARED_HOME: c:/projects/autorest.csharp/
+  APPVEYOR_YML_DISABLE_PS_LINUX: true
+# stack: node 8.9.10, go 1.10, ruby 2.3, jdk 8
+stack: node 8.9.10
+
+install:
+- ps: Install-Product node $env:nodejs_version x64
+- npm install 
+
+build_script:
+- npm run build
+test_script:
+- npm run testci
