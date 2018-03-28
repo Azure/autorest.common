@@ -94,8 +94,7 @@ namespace AutoRest.Extensions.Azure
                 throw new ArgumentNullException("codeModel");
             }
 
-            foreach (var method in codeModel.Methods.Where(m => m.HttpMethod == HttpMethod.Head)
-                                                              .Where(m => m.ReturnType.Body == null))
+            foreach (var method in codeModel.Methods.Where(m => m.HttpMethod == HttpMethod.Head).Where(m => m.ReturnType.Body == null))
             {
                 HttpStatusCode successStatusCode = method.Responses.Keys.FirstOrDefault(AzureExtensions.HttpHeadStatusCodeSuccessFunc);
 
