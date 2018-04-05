@@ -24,13 +24,6 @@
     <GenerateFullPaths>true</GenerateFullPaths>
     <Common>$(MsBuildThisFileDirectory)</Common>
     <SolutionDir>$(Common)../</SolutionDir> 
-    
-    <!-- 
-    <DelaySign Condition="$(Configuration) == 'Release'">true</DelaySign>
-    <AssemblyOriginatorKeyFile Condition="$(Configuration) == 'Release'">$(SolutionDir)/tools/MSSharedLibKey.snk</AssemblyOriginatorKeyFile>
-    <SignAssembly Condition="$(Configuration) == 'Release'">true</SignAssembly>
-    <_PackageTargetFallback>$(PackageTargetFallback);dotnet;portable-net45+win8;netstandard1.3</_PackageTargetFallback>
-    -->
 
     <OutputType>library</OutputType>
     <TargetFramework>netstandard2.0</TargetFramework>    
@@ -43,7 +36,7 @@
     <Delete Files="$(BaseOutputPath)**;$(BaseIntermediateOutputPath)razor/**;$(BaseIntermediateOutputPath)Debug/**;$(BaseIntermediateOutputPath)Release/**" />
     <RemoveDir Directories="$(BaseOutputPath);$(BaseIntermediateOutputPath)/Debug;$(BaseIntermediateOutputPath)/Release" />
   </Target>
-  
+
   <Target Name="UpdateResources" BeforeTargets="BeforeBuild">
     <!-- <Message Text="Ensuring resources .cs files are netframework compatible [$(MSBuildProjectName)]" Importance="high" /> -->
     <PropertyGroup>
