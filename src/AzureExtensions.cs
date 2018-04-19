@@ -258,7 +258,7 @@ namespace AutoRest.Extensions.Azure
                 acceptLanguage = New<Property>(new
                 {
                     Name = AcceptLanguage,
-                    Documentation = "Gets or sets the preferred language for the response.",
+                    Documentation = "The preferred language for the response.",
                     SerializedName = AcceptLanguage,
                     DefaultValue = "en-US"
                 });
@@ -290,7 +290,7 @@ namespace AutoRest.Extensions.Azure
                 Name = "LongRunningOperationRetryTimeout",
                 SerializedName = "longRunningOperationRetryTimeout",
                 ModelType = New<PrimaryType>(KnownPrimaryType.Int),
-                Documentation = "Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30.",
+                Documentation = "The retry timeout in seconds for Long Running Operations. Default value is 30.",
                 DefaultValue = "30"
             }));
 
@@ -299,7 +299,7 @@ namespace AutoRest.Extensions.Azure
                 Name = "GenerateClientRequestId",
                 SerializedName = "generateClientRequestId",
                 ModelType = New<PrimaryType>(KnownPrimaryType.Boolean),
-                Documentation = "When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.",
+                Documentation = "Whether a unique x-ms-client-request-id should be generated. When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.",
                 DefaultValue = "true"
             }));
         }
