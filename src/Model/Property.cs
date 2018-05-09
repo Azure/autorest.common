@@ -125,7 +125,7 @@ namespace AutoRest.Core.Model
         public XmlProperties XmlProperties { get; set; }
 
         [JsonIgnore]
-        public string XmlName => XmlProperties?.Name ?? RealPath.FirstOrDefault() ?? Name;
+        public string XmlName => XmlProperties?.Name ?? RealPath?.FirstOrDefault() ?? Name;
         [JsonIgnore]
         public string XmlNamespace => XmlProperties?.Namespace ?? ModelType.XmlNamespace;
         [JsonIgnore]
