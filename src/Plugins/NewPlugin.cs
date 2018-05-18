@@ -77,9 +77,21 @@ public abstract class NewPlugin :  AutoRest.Core.IHost
     public Task<T> GetValue<T>(string key) => _connection.Request<T>("GetValue", _sessionId, key);
     public Task<string> GetValue(string key) => GetValue<string>(key);
     public Task<string[]> ListInputs() => _connection.Request<string[]>("ListInputs", _sessionId);
+    public Task<string[]> ListInputs(string artifactType) => _connection.Request<string[]>("ListInputs", artifactType, _sessionId);
 
     public void Message(Message message) => _connection.Notify("Message", _sessionId, message);
     public void WriteFile(string filename, string content, object sourcemap) => _connection.Notify("WriteFile", _sessionId, filename, content, sourcemap);
+    public void WriteFile(string filename, string content, object sourcemap, string artifactType) => _connection.Notify( "Message", _sessionId, new Message { 
+        Channel = "file", 
+        Details = new { 
+            content=content,
+            type= artifactType,
+            uri= filename,
+            sourceMap= sourcemap,
+        },
+        Text= content, 
+        Key= new[] {artifactType,filename}
+    });
 
     private Connection _connection;
     protected string Plugin { get; private set; }
