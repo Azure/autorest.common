@@ -8,6 +8,7 @@
     "build": "gulp build",
     "clean": "gulp clean",
     "postinstall": "gulp restore",
+    "prepare": "gulp build",
     "publish-preview": "NOT YET AUTOMATED",
     "nuke": "git clean -xdf",
     "prepublishOnly": "I am a syntax error that prevents you from accidentally publishing this on npm. This package is published on Nuget!"
