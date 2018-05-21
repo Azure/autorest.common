@@ -94,8 +94,7 @@ namespace AutoRest.Extensions.Azure
                 throw new ArgumentNullException("codeModel");
             }
 
-            foreach (var method in codeModel.Methods.Where(m => m.HttpMethod == HttpMethod.Head)
-                                                              .Where(m => m.ReturnType.Body == null))
+            foreach (var method in codeModel.Methods.Where(m => m.HttpMethod == HttpMethod.Head).Where(m => m.ReturnType.Body == null))
             {
                 HttpStatusCode successStatusCode = method.Responses.Keys.FirstOrDefault(AzureExtensions.HttpHeadStatusCodeSuccessFunc);
 
@@ -162,9 +161,7 @@ namespace AutoRest.Extensions.Azure
                 string odataModelPath = (string) method.Extensions[ODataExtension];
                 if (odataModelPath == null)
                 {
-                    throw new InvalidOperationException(
-                        string.Format(CultureInfo.InvariantCulture, 
-                        "{0} needs to have a value.", ODataExtension));
+                    throw new InvalidOperationException($"{ODataExtension} in method '{method.SerializedName}' needs to have a value.");
                 }
 
                 odataModelPath = AutoRest.Swagger.Extensions.StripDefinitionPath(odataModelPath);
@@ -174,18 +171,14 @@ namespace AutoRest.Extensions.Azure
 
                 if (odataType == null)
                 {
-                    throw new InvalidOperationException(
-                        string.Format(CultureInfo.InvariantCulture, 
-                        "{0} needs to have a valid definition reference.", ODataExtension));
+                    throw new InvalidOperationException($"{ODataExtension} in method '{method.SerializedName}' needs to have a valid definition reference .");
                 }
                 var filterParameter = method.Parameters
                     .FirstOrDefault(p => p.Location == ParameterLocation.Query &&
                                          p.Name.FixedValue == "$filter");
                 if (filterParameter == null)
                 {
-                    throw new InvalidOperationException(
-                        string.Format(CultureInfo.InvariantCulture, 
-                        "Method with {0} needs to have \"$filter\" parameter.", ODataExtension));
+                    throw new InvalidOperationException($"Method '{method.SerializedName}' with {ODataExtension} needs to have \"$filter\" parameter.");
                 }
 
                 filterParameter.ModelType = odataType;
