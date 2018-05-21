@@ -19,6 +19,7 @@ namespace AutoRest.Core
         Task<T> GetValue<T>(string key);
         Task<string> GetValue(string key);
         Task<string[]> ListInputs();
+        Task<string[]> ListInputs(string artifactType);
     }
 
     public class NullHost : IHost {
@@ -26,6 +27,7 @@ namespace AutoRest.Core
         public Task<T> GetValue<T>(string key)=> (default(T)).AsResultTask();
         public Task<string> GetValue(string key)=> string.Empty.AsResultTask();
         public Task<string[]> ListInputs()=> (new string[0]).AsResultTask();
+        public Task<string[]> ListInputs(string artifactType)=>(new string[0]).AsResultTask();
     }
     public class Settings : IsSingleton<Settings>
     {

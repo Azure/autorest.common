@@ -76,8 +76,8 @@ public abstract class NewPlugin :  AutoRest.Core.IHost
     public Task<string> ReadFile(string filename) => _connection.Request<string>("ReadFile", _sessionId, filename);
     public Task<T> GetValue<T>(string key) => _connection.Request<T>("GetValue", _sessionId, key);
     public Task<string> GetValue(string key) => GetValue<string>(key);
-    public Task<string[]> ListInputs() => _connection.Request<string[]>("ListInputs", _sessionId);
-    public Task<string[]> ListInputs(string artifactType) => _connection.Request<string[]>("ListInputs", artifactType, _sessionId);
+    public Task<string[]> ListInputs() => _connection.Request<string[]>("ListInputs", _sessionId,null);
+    public Task<string[]> ListInputs(string artifactType) => _connection.Request<string[]>("ListInputs", _sessionId, artifactType);
 
     public void Message(Message message) => _connection.Notify("Message", _sessionId, message);
     public void WriteFile(string filename, string content, object sourcemap) => _connection.Notify("WriteFile", _sessionId, filename, content, sourcemap);
