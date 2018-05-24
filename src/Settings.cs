@@ -20,6 +20,11 @@ namespace AutoRest.Core
         Task<string> GetValue(string key);
         Task<string[]> ListInputs();
         Task<string[]> ListInputs(string artifactType);
+        Task ProtectFiles( string path );
+        Task<string> GetConfigurationFile(string filename);
+        void UpdateConfigurationFile(string filename, string content);
+        void WriteFile(string filename, string content, object sourcemap);
+        void WriteFile(string filename, string content, object sourcemap, string artifactType);
     }
 
     public class NullHost : IHost {
@@ -28,6 +33,11 @@ namespace AutoRest.Core
         public Task<string> GetValue(string key)=> string.Empty.AsResultTask();
         public Task<string[]> ListInputs()=> (new string[0]).AsResultTask();
         public Task<string[]> ListInputs(string artifactType)=>(new string[0]).AsResultTask();
+        public Task ProtectFiles( string path ) => string.Empty.AsResultTask();
+        public Task<string> GetConfigurationFile(string filename) => string.Empty.AsResultTask();
+        public void UpdateConfigurationFile(string filename, string content) { }
+        public void WriteFile(string filename, string content, object sourcemap) { }
+        public void WriteFile(string filename, string content, object sourcemap, string artifactType){}
     }
     public class Settings : IsSingleton<Settings>
     {

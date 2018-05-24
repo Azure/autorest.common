@@ -93,7 +93,7 @@ public abstract class NewPlugin :  AutoRest.Core.IHost
         Key= new[] {artifactType,filename}
     });
 
-    public async void ProtectFiles( string path ) {
+    public async Task ProtectFiles( string path ) {
         try {
         var items = await ListInputs(path);
         if( items?.Length > 0 ) {
