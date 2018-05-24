@@ -93,6 +93,51 @@ public abstract class NewPlugin :  AutoRest.Core.IHost
         Key= new[] {artifactType,filename}
     });
 
+    public async void ProtectFiles( string path ) {
+        try {
+        var items = await ListInputs(path);
+        if( items?.Length > 0 ) {
+            foreach( var each in items) {
+                try {
+                    var content = await ReadFile(each);
+                    WriteFile(each, content,null, "preserved-files");
+                } catch  {
+                    // no good.
+                }
+            }
+            return;
+        }
+        var contentsingle = await ReadFile(path); 
+        WriteFile(path, contentsingle,null, "preserved-files");
+        } catch {
+            // oh well.
+        }
+    }
+
+    public async Task<string> GetConfigurationFile(string filename) {
+        var configurations =await GetValue<Dictionary<string,string>>("configurationFiles");
+        if( configurations != null ) {
+            var first = configurations.Keys.FirstOrDefault();
+            if( first != null) {
+                first = first.Substring(0, first.LastIndexOf('/'));
+                foreach( var configFile in configurations?.Keys) { 
+                    if( configFile == $"{first}/{filename}") {
+                        return configurations[configFile];
+                    }
+                }
+            }
+        }
+        return "";
+    }
+
+    public void UpdateConfigurationFile(string filename, string content) {
+         _connection.Notify("Message", _sessionId, new Message { 
+             Channel = "configuration",
+             Key = new [] { filename },
+             Text = content
+         });
+    }
+
     private Connection _connection;
     protected string Plugin { get; private set; }
     protected string _sessionId;
