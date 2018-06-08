@@ -8,6 +8,7 @@ using System.Globalization;
 using System.Linq;
 using System.Net;
 using AutoRest.Core.Utilities;
+using AutoRest.Extensions.Azure;
 using AutoRest.Core.Utilities.Collections;
 using Newtonsoft.Json;
 using static AutoRest.Core.Utilities.DependencyInjection;
@@ -22,6 +23,14 @@ namespace AutoRest.Core.Model
         ForwardTo,
         // just paste the implementation (Implementation property may be null, meaning stub body)
         Implementation,
+    }
+
+    public enum FinalStateVia {
+        None = -1,
+        Default = 0, 
+        AzureAsyncOperation = 0,
+        Location,
+        OriginalUri,
     }
 
     /// <summary>
@@ -230,6 +239,38 @@ namespace AutoRest.Core.Model
         [JsonIgnore]
         public IEnumerable<IChild> Children => Parameters;
 
+        [JsonIgnore]
+        public FinalStateVia LongRunningFinalState { get { 
+            try { 
+                Extensions.TryGetValue(AzureExtensions.LongRunningExtension, out object lro);
+
+                if( lro == null) {
+                    return FinalStateVia.None;
+                }
+            
+                var lroOptions = Extensions.GetValue<Newtonsoft.Json.Linq.JObject>(AzureExtensions.LongRunningExtensionOptions);
+                if( lroOptions != null) {
+                    try {
+                        switch(  lroOptions.GetValue(AzureExtensions.FinalStateVia)?.ToString() ) {
+                            case "location" : 
+                            return FinalStateVia.Location;
+                            case "azure-async-operation" : 
+                            case "azure-asyncoperation" : 
+                            return FinalStateVia.AzureAsyncOperation;
+                            case "original-uri" : 
+                            return FinalStateVia.OriginalUri;
+                        }
+                    } catch { 
+                        // unknown -- return default
+                    }
+                }
+            
+            }
+            catch {
+                // nothing to see here.
+            }
+            return FinalStateVia.Default;
+        } }
 
         [JsonIgnore]
         public virtual HashSet<string> LocallyUsedNames { get; } = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
