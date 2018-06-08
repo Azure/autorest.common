@@ -7,6 +7,7 @@
     "testci": "gulp test",
     "build": "gulp build",
     "clean": "gulp clean",
+    "code": "code .",
     "postinstall": "gulp restore",
     "prepare": "gulp build",
     "publish-preview": "NOT YET AUTOMATED",

@@ -25,6 +25,8 @@ namespace AutoRest.Extensions.Azure
     public abstract class AzureExtensions : SwaggerExtensions
     {
         public const string LongRunningExtension = "x-ms-long-running-operation";
+        public const string LongRunningExtensionOptions = "x-ms-long-running-operation-options";
+        public const string FinalStateVia = "final-state-via";
         public const string PageableExtension = "x-ms-pageable";
         public const string AzureResourceExtension = "x-ms-azure-resource";
         public const string ODataExtension = "x-ms-odata";
