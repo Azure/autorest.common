@@ -28,9 +28,9 @@ namespace AutoRest.Core.Model
     public enum FinalStateVia {
         None = -1,
         Default = 0, 
-        AzureAsyncOperation = 0,
-        Location,
-        OriginalUri,
+        AzureAsyncOperation = 1,
+        Location =2,
+        OriginalUri =3,
     }
 
     /// <summary>
@@ -244,6 +244,7 @@ namespace AutoRest.Core.Model
             try { 
                 Extensions.TryGetValue(AzureExtensions.LongRunningExtension, out object lro);
 
+                // none means you probably shouldn't have asked (not a long running operation)
                 if( lro == null) {
                     return FinalStateVia.None;
                 }
