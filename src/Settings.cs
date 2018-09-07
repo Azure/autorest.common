@@ -246,19 +246,20 @@ Licensed under the MIT License. See License.txt in the project root for license 
 
                     if (property != null)
                     {
+                        Type propertyType = Nullable.GetUnderlyingType(property.PropertyType) ?? property.PropertyType;
                         try
                         {
-                            if (property.PropertyType == typeof(bool) && (setting.Value == null || setting.Value.ToString().IsNullOrEmpty()))
+                            if (propertyType == typeof(bool) && (setting.Value == null || setting.Value.ToString().IsNullOrEmpty()))
                             {
                                 property.SetValue(entityToPopulate, true);
                             }
-                            else if (property.PropertyType.IsEnum())
+                            else if (propertyType.IsEnum())
                             {
-                                property.SetValue(entityToPopulate, Enum.Parse(property.PropertyType, setting.Value.ToString(), true));
+                                property.SetValue(entityToPopulate, Enum.Parse(propertyType, setting.Value.ToString(), true));
                             }
-                            else if (property.PropertyType.IsArray && setting.Value.GetType() == typeof(JArray))
+                            else if (propertyType.IsArray && setting.Value.GetType() == typeof(JArray))
                             {
-                                var elementType = property.PropertyType.GetElementType();
+                                var elementType = propertyType.GetElementType();
                                 if (elementType == typeof(string))
                                 {
                                     var stringArray = ((JArray)setting.Value).Children().
@@ -279,7 +280,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
                             else if (property.CanWrite)
                             {
                                 property.SetValue(entityToPopulate,
-                                    Convert.ChangeType(setting.Value, property.PropertyType, CultureInfo.InvariantCulture), null);
+                                    Convert.ChangeType(setting.Value, propertyType, CultureInfo.InvariantCulture), null);
                             }
 
                             settings.Remove(setting.Key);
