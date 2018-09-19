@@ -213,7 +213,7 @@ namespace AutoRest.Extensions.Azure
                     m.Extensions.Remove(LongRunningExtension);
 
                     codeModel.Add(m);
-
+                    method.MethodGroup?.Add(m);
                 }
             }
         }
