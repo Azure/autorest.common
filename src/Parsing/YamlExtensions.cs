@@ -12,13 +12,13 @@ namespace AutoRest.Core.Parsing
 {
     public static class YamlExtensions
     {
-        private static Deserializer YamlDeserializer
+        private static IDeserializer YamlDeserializer
         {
             get
             {
-                var d = new Deserializer();
-                d.NodeDeserializers.Insert(0, new YamlBoolDeserializer());
-                return d;
+                var d = new DeserializerBuilder();
+                d.WithNodeDeserializer(new YamlBoolDeserializer());
+                return d.Build();
             }
         }
         private static JsonSerializer JsonSerializer => new JsonSerializer();
