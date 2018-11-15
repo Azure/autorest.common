@@ -283,7 +283,11 @@ namespace AutoRest.Extensions
                 string typeName = typeNames.First();
                 typeNames.Remove(typeName);
 
-                var typeToDelete = codeModel.ModelTypes.First(t => t.Name == typeName);
+                var typeToDelete = codeModel.ModelTypes.FirstOrDefault(t => t.Name == typeName);
+
+                if (typeToDelete == null) {
+                    return;
+                }
 
                 var isUsedInErrorTypes = codeModel.ErrorTypes.Any(e => e.Name == typeName);
                 var isUsedInResponses = codeModel.Methods.Any(m => m.Responses.Any(r => typeReferenced(typeToDelete, r.Value.Body)));
