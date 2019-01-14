@@ -1,0 +1,92 @@
+{
+  "openapi": "3.0.0",
+  "servers": [
+    {
+      "url": "http://autorestresourcesproxysite.azurewebsites.net/"
+    }
+  ],
+  "info": {
+    "version": "1.0.13",
+    "title": "Swagger Custom Paths"
+  },
+  "paths": {
+    "/values/foo": {
+      "post": {
+        "tags": [
+          "Values"
+        ],
+        "operationId": "Values_Post",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "requestBody": {
+          "$ref": "#/components/requestBodies/Product"
+        },
+        "x-ms-requestBody-index": 0
+      }
+    }
+  },
+  "x-ms-paths": {
+    "/values/foo": {
+      "post": {
+        "tags": [
+          "Values"
+        ],
+        "operationId": "Values_CustomPost1",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "requestBody": {
+          "$ref": "#/components/requestBodies/Product"
+        },
+        "x-ms-requestBody-index": 0
+      }
+    },
+    "/values/foo?query": {
+      "post": {
+        "tags": [
+          "Values"
+        ],
+        "operationId": "Values_CustomPost2",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "requestBody": {
+          "$ref": "#/components/requestBodies/Product"
+        },
+        "x-ms-requestBody-index": 0
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Product": {
+        "properties": {
+          "integer": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "requestBodies": {
+      "Product": {
+        "x-ms-client-name": "body",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Product"
+            }
+          }
+        },
+        "description": "file to upload",
+        "required": true
+      }
+    }
+  }
+}

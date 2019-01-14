@@ -1,0 +1,1374 @@
+{
+  "openapi": "3.0.0",
+  "servers": [
+    {
+      "url": "http://petstore.swagger.wordnik.com/api"
+    },
+    {
+      "url": "https://petstore.swagger.wordnik.com/api"
+    }
+  ],
+  "info": {
+    "version": "1.0.0",
+    "title": "Swagger Petstore",
+    "description": "A sample API that uses a petstore as an example to demonstrate features in the swagger-2.0 specification",
+    "termsOfService": "http://helloreverb.com/terms/",
+    "contact": {
+      "name": "Wordnik API Team",
+      "email": "foo@example.com",
+      "url": "http://madskristensen.net"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "http://github.com/gruntjs/grunt/blob/master/LICENSE-MIT"
+    }
+  },
+  "paths": {
+    "/pets": {
+      "get": {
+        "description": "Returns all pets from the system that the user has access to",
+        "operationId": "getSameResponse",
+        "parameters": [
+          {
+            "name": "tags",
+            "in": "query",
+            "description": "tags to filter by",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "maximum number of results to return",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/pet"
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/pet"
+                  }
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/pet"
+                  }
+                }
+              },
+              "text/html": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/pet"
+                  }
+                }
+              },
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/pet"
+                  }
+                }
+              },
+              "application/xml; charset=utf-8": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/pet"
+                  }
+                }
+              },
+              "application/atom+xml": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/pet"
+                  }
+                }
+              },
+              "application/atom+xml; charset=utf-8": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/pet"
+                  }
+                }
+              },
+              "application/octet-stream": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/pet"
+                  }
+                }
+              },
+              "application/zip": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/pet"
+                  }
+                }
+              },
+              "application/gzip": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/pet"
+                  }
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "202 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/pet"
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/pet"
+                  }
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/pet"
+                  }
+                }
+              },
+              "text/html": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/pet"
+                  }
+                }
+              },
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/pet"
+                  }
+                }
+              },
+              "application/xml; charset=utf-8": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/pet"
+                  }
+                }
+              },
+              "application/atom+xml": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/pet"
+                  }
+                }
+              },
+              "application/atom+xml; charset=utf-8": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/pet"
+                  }
+                }
+              },
+              "application/octet-stream": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/pet"
+                  }
+                }
+              },
+              "application/zip": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/pet"
+                  }
+                }
+              },
+              "application/gzip": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/pet"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorModel"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorModel"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorModel"
+                }
+              },
+              "text/html": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorModel"
+                }
+              },
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorModel"
+                }
+              },
+              "application/xml; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorModel"
+                }
+              },
+              "application/atom+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorModel"
+                }
+              },
+              "application/atom+xml; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorModel"
+                }
+              },
+              "application/octet-stream": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorModel"
+                }
+              },
+              "application/zip": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorModel"
+                }
+              },
+              "application/gzip": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorModel"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "description": "Creates a new pet in the store.  Duplicates are allowed",
+        "operationId": "postInheretedTypes",
+        "responses": {
+          "200": {
+            "description": "pet response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dog"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/dog"
+                }
+              },
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/dog"
+                }
+              },
+              "application/xml; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/dog"
+                }
+              },
+              "application/atom+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/dog"
+                }
+              },
+              "application/atom+xml; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/dog"
+                }
+              },
+              "application/octet-stream": {
+                "schema": {
+                  "$ref": "#/components/schemas/dog"
+                }
+              },
+              "application/zip": {
+                "schema": {
+                  "$ref": "#/components/schemas/dog"
+                }
+              },
+              "application/gzip": {
+                "schema": {
+                  "$ref": "#/components/schemas/dog"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "cat response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/cat"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/cat"
+                }
+              },
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/cat"
+                }
+              },
+              "application/xml; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/cat"
+                }
+              },
+              "application/atom+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/cat"
+                }
+              },
+              "application/atom+xml; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/cat"
+                }
+              },
+              "application/octet-stream": {
+                "schema": {
+                  "$ref": "#/components/schemas/cat"
+                }
+              },
+              "application/zip": {
+                "schema": {
+                  "$ref": "#/components/schemas/cat"
+                }
+              },
+              "application/gzip": {
+                "schema": {
+                  "$ref": "#/components/schemas/cat"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "cat response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/cat"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/cat"
+                }
+              },
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/cat"
+                }
+              },
+              "application/xml; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/cat"
+                }
+              },
+              "application/atom+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/cat"
+                }
+              },
+              "application/atom+xml; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/cat"
+                }
+              },
+              "application/octet-stream": {
+                "schema": {
+                  "$ref": "#/components/schemas/cat"
+                }
+              },
+              "application/zip": {
+                "schema": {
+                  "$ref": "#/components/schemas/cat"
+                }
+              },
+              "application/gzip": {
+                "schema": {
+                  "$ref": "#/components/schemas/cat"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorModel"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorModel"
+                }
+              },
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorModel"
+                }
+              },
+              "application/xml; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorModel"
+                }
+              },
+              "application/atom+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorModel"
+                }
+              },
+              "application/atom+xml; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorModel"
+                }
+              },
+              "application/octet-stream": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorModel"
+                }
+              },
+              "application/zip": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorModel"
+                }
+              },
+              "application/gzip": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorModel"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "x-ms-client-name": "pet",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/newPet"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/newPet"
+              }
+            },
+            "application/json; charset=utf-8": {
+              "schema": {
+                "$ref": "#/components/schemas/newPet"
+              }
+            },
+            "application/xml; charset=utf-8": {
+              "schema": {
+                "$ref": "#/components/schemas/newPet"
+              }
+            },
+            "application/atom+xml": {
+              "schema": {
+                "$ref": "#/components/schemas/newPet"
+              }
+            },
+            "application/octet-stream": {
+              "schema": {
+                "$ref": "#/components/schemas/newPet"
+              }
+            },
+            "application/zip": {
+              "schema": {
+                "$ref": "#/components/schemas/newPet"
+              }
+            },
+            "application/gzip": {
+              "schema": {
+                "$ref": "#/components/schemas/newPet"
+              }
+            }
+          },
+          "description": "Pet to add to the store",
+          "required": true
+        },
+        "x-ms-requestBody-index": 0
+      },
+      "put": {
+        "tags": [],
+        "summary": "",
+        "description": "",
+        "operationId": "putSameResponseType",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/petResponse"
+          },
+          "203": {
+            "$ref": "#/components/responses/petResponse"
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorModel"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorModel"
+                }
+              },
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorModel"
+                }
+              },
+              "application/xml; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorModel"
+                }
+              },
+              "application/atom+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorModel"
+                }
+              },
+              "application/atom+xml; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorModel"
+                }
+              },
+              "application/octet-stream": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorModel"
+                }
+              },
+              "application/zip": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorModel"
+                }
+              },
+              "application/gzip": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorModel"
+                }
+              }
+            }
+          }
+        },
+        "x-test-header-info": {
+          "name": "x-static-header",
+          "value": "headerValue"
+        },
+        "requestBody": {
+          "$ref": "#/components/requestBodies/pet"
+        },
+        "x-ms-requestBody-index": 0
+      },
+      "delete": {
+        "tags": [],
+        "summary": "",
+        "description": "",
+        "operationId": "deleteDifferentTypes",
+        "responses": {
+          "200": {
+            "description": "pet response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/pet"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/pet"
+                }
+              },
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/pet"
+                }
+              },
+              "application/xml; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/pet"
+                }
+              },
+              "application/atom+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/pet"
+                }
+              },
+              "application/atom+xml; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/pet"
+                }
+              },
+              "application/octet-stream": {
+                "schema": {
+                  "$ref": "#/components/schemas/pet"
+                }
+              },
+              "application/zip": {
+                "schema": {
+                  "$ref": "#/components/schemas/pet"
+                }
+              },
+              "application/gzip": {
+                "schema": {
+                  "$ref": "#/components/schemas/pet"
+                }
+              }
+            }
+          },
+          "206": {
+            "description": "newPet response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/newPet"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/newPet"
+                }
+              },
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/newPet"
+                }
+              },
+              "application/xml; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/newPet"
+                }
+              },
+              "application/atom+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/newPet"
+                }
+              },
+              "application/atom+xml; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/newPet"
+                }
+              },
+              "application/octet-stream": {
+                "schema": {
+                  "$ref": "#/components/schemas/newPet"
+                }
+              },
+              "application/zip": {
+                "schema": {
+                  "$ref": "#/components/schemas/newPet"
+                }
+              },
+              "application/gzip": {
+                "schema": {
+                  "$ref": "#/components/schemas/newPet"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorModel"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorModel"
+                }
+              },
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorModel"
+                }
+              },
+              "application/xml; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorModel"
+                }
+              },
+              "application/atom+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorModel"
+                }
+              },
+              "application/atom+xml; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorModel"
+                }
+              },
+              "application/octet-stream": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorModel"
+                }
+              },
+              "application/zip": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorModel"
+                }
+              },
+              "application/gzip": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorModel"
+                }
+              }
+            }
+          }
+        },
+        "x-test-header-info": {
+          "name": "x-static-header",
+          "value": "headerValue"
+        },
+        "requestBody": {
+          "$ref": "#/components/requestBodies/pet"
+        },
+        "x-ms-requestBody-index": 0
+      },
+      "patch": {
+        "tags": [],
+        "summary": "",
+        "description": "",
+        "operationId": "patchDefaultResponse",
+        "responses": {
+          "default": {
+            "description": "pet",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/pet"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/pet"
+                }
+              },
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/pet"
+                }
+              },
+              "application/xml; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/pet"
+                }
+              },
+              "application/atom+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/pet"
+                }
+              },
+              "application/atom+xml; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/pet"
+                }
+              },
+              "application/octet-stream": {
+                "schema": {
+                  "$ref": "#/components/schemas/pet"
+                }
+              },
+              "application/zip": {
+                "schema": {
+                  "$ref": "#/components/schemas/pet"
+                }
+              },
+              "application/gzip": {
+                "schema": {
+                  "$ref": "#/components/schemas/pet"
+                }
+              }
+            }
+          }
+        },
+        "x-test-header-info": {
+          "name": "x-static-header",
+          "value": "headerValue"
+        },
+        "requestBody": {
+          "$ref": "#/components/requestBodies/pet"
+        },
+        "x-ms-requestBody-index": 0
+      }
+    },
+    "/streamedpets": {
+      "get": {
+        "description": "Returns all pets from the system that the user has access to",
+        "operationId": "getSameStreamResponse",
+        "parameters": [
+          {
+            "name": "tags",
+            "in": "query",
+            "description": "tags to filter by",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "maximum number of results to return",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VirtualMachineGetRemoteDesktopFileResponse"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/VirtualMachineGetRemoteDesktopFileResponse"
+                }
+              },
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/VirtualMachineGetRemoteDesktopFileResponse"
+                }
+              },
+              "application/xml; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/VirtualMachineGetRemoteDesktopFileResponse"
+                }
+              },
+              "application/atom+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/VirtualMachineGetRemoteDesktopFileResponse"
+                }
+              },
+              "application/atom+xml; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/VirtualMachineGetRemoteDesktopFileResponse"
+                }
+              },
+              "application/octet-stream": {
+                "schema": {
+                  "$ref": "#/components/schemas/VirtualMachineGetRemoteDesktopFileResponse"
+                }
+              },
+              "application/zip": {
+                "schema": {
+                  "$ref": "#/components/schemas/VirtualMachineGetRemoteDesktopFileResponse"
+                }
+              },
+              "application/gzip": {
+                "schema": {
+                  "$ref": "#/components/schemas/VirtualMachineGetRemoteDesktopFileResponse"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "202 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VirtualMachineGetRemoteDesktopFileResponse"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/VirtualMachineGetRemoteDesktopFileResponse"
+                }
+              },
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/VirtualMachineGetRemoteDesktopFileResponse"
+                }
+              },
+              "application/xml; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/VirtualMachineGetRemoteDesktopFileResponse"
+                }
+              },
+              "application/atom+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/VirtualMachineGetRemoteDesktopFileResponse"
+                }
+              },
+              "application/atom+xml; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/VirtualMachineGetRemoteDesktopFileResponse"
+                }
+              },
+              "application/octet-stream": {
+                "schema": {
+                  "$ref": "#/components/schemas/VirtualMachineGetRemoteDesktopFileResponse"
+                }
+              },
+              "application/zip": {
+                "schema": {
+                  "$ref": "#/components/schemas/VirtualMachineGetRemoteDesktopFileResponse"
+                }
+              },
+              "application/gzip": {
+                "schema": {
+                  "$ref": "#/components/schemas/VirtualMachineGetRemoteDesktopFileResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorModel"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorModel"
+                }
+              },
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorModel"
+                }
+              },
+              "application/xml; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorModel"
+                }
+              },
+              "application/atom+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorModel"
+                }
+              },
+              "application/atom+xml; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorModel"
+                }
+              },
+              "application/octet-stream": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorModel"
+                }
+              },
+              "application/zip": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorModel"
+                }
+              },
+              "application/gzip": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorModel"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [],
+        "summary": "",
+        "description": "",
+        "operationId": "patchDifferentStreamTypesNoContent",
+        "responses": {
+          "200": {
+            "description": "pet response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VirtualMachineGetRemoteDesktopFileResponse"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/VirtualMachineGetRemoteDesktopFileResponse"
+                }
+              },
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/VirtualMachineGetRemoteDesktopFileResponse"
+                }
+              },
+              "application/xml; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/VirtualMachineGetRemoteDesktopFileResponse"
+                }
+              },
+              "application/atom+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/VirtualMachineGetRemoteDesktopFileResponse"
+                }
+              },
+              "application/atom+xml; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/VirtualMachineGetRemoteDesktopFileResponse"
+                }
+              },
+              "application/octet-stream": {
+                "schema": {
+                  "$ref": "#/components/schemas/VirtualMachineGetRemoteDesktopFileResponse"
+                }
+              },
+              "application/zip": {
+                "schema": {
+                  "$ref": "#/components/schemas/VirtualMachineGetRemoteDesktopFileResponse"
+                }
+              },
+              "application/gzip": {
+                "schema": {
+                  "$ref": "#/components/schemas/VirtualMachineGetRemoteDesktopFileResponse"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "no content response"
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorModel"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorModel"
+                }
+              },
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorModel"
+                }
+              },
+              "application/xml; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorModel"
+                }
+              },
+              "application/atom+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorModel"
+                }
+              },
+              "application/atom+xml; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorModel"
+                }
+              },
+              "application/octet-stream": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorModel"
+                }
+              },
+              "application/zip": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorModel"
+                }
+              },
+              "application/gzip": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorModel"
+                }
+              }
+            }
+          }
+        },
+        "x-test-header-info": {
+          "name": "x-static-header",
+          "value": "headerValue"
+        },
+        "requestBody": {
+          "$ref": "#/components/requestBodies/pet"
+        },
+        "x-ms-requestBody-index": 0
+      }
+    }
+  },
+  "security": [],
+  "tags": [],
+  "components": {
+    "schemas": {
+      "pet": {
+        "required": [
+          "id",
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          },
+          "tag": {
+            "type": "string"
+          }
+        }
+      },
+      "cat": {
+        "extends": "pet",
+        "required": [
+          "breed"
+        ],
+        "properties": {
+          "breed": {
+            "type": "string"
+          },
+          "color": {
+            "type": "string"
+          }
+        }
+      },
+      "siamese": {
+        "extends": "cat",
+        "properties": {
+          "mood": {
+            "type": "string"
+          }
+        }
+      },
+      "dog": {
+        "extends": "pet",
+        "required": [
+          "pedigree"
+        ],
+        "properties": {
+          "pedigree": {
+            "type": "boolean"
+          }
+        }
+      },
+      "newPet": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/pet"
+          },
+          {
+            "required": [
+              "name"
+            ],
+            "properties": {
+              "id": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          }
+        ]
+      },
+      "errorModel": {
+        "required": [
+          "code",
+          "message"
+        ],
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "VirtualMachineGetRemoteDesktopFileResponse": {
+        "properties": {
+          "RemoteDesktopFile": {
+            "type": "string",
+            "format": "byte"
+          }
+        }
+      }
+    },
+    "responses": {
+      "petResponse": {
+        "description": " A created or updated pet",
+        "headers": {
+          "x-ms-request-id": {
+            "description": " The request ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/pet"
+            }
+          },
+          "application/xml": {
+            "schema": {
+              "$ref": "#/components/schemas/pet"
+            }
+          },
+          "application/json; charset=utf-8": {
+            "schema": {
+              "$ref": "#/components/schemas/pet"
+            }
+          },
+          "application/xml; charset=utf-8": {
+            "schema": {
+              "$ref": "#/components/schemas/pet"
+            }
+          },
+          "application/atom+xml": {
+            "schema": {
+              "$ref": "#/components/schemas/pet"
+            }
+          },
+          "application/atom+xml; charset=utf-8": {
+            "schema": {
+              "$ref": "#/components/schemas/pet"
+            }
+          },
+          "application/octet-stream": {
+            "schema": {
+              "$ref": "#/components/schemas/pet"
+            }
+          },
+          "application/zip": {
+            "schema": {
+              "$ref": "#/components/schemas/pet"
+            }
+          },
+          "application/gzip": {
+            "schema": {
+              "$ref": "#/components/schemas/pet"
+            }
+          }
+        }
+      }
+    },
+    "requestBodies": {
+      "pet": {
+        "x-ms-client-name": "PetCreateOrUpdateParameter",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/pet"
+            }
+          },
+          "application/xml": {
+            "schema": {
+              "$ref": "#/components/schemas/pet"
+            }
+          },
+          "application/json; charset=utf-8": {
+            "schema": {
+              "$ref": "#/components/schemas/pet"
+            }
+          },
+          "application/xml; charset=utf-8": {
+            "schema": {
+              "$ref": "#/components/schemas/pet"
+            }
+          },
+          "application/atom+xml": {
+            "schema": {
+              "$ref": "#/components/schemas/pet"
+            }
+          },
+          "application/octet-stream": {
+            "schema": {
+              "$ref": "#/components/schemas/pet"
+            }
+          },
+          "application/zip": {
+            "schema": {
+              "$ref": "#/components/schemas/pet"
+            }
+          },
+          "application/gzip": {
+            "schema": {
+              "$ref": "#/components/schemas/pet"
+            }
+          }
+        },
+        "description": "A Pet",
+        "required": true
+      }
+    }
+  }
+}

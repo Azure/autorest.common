@@ -1,0 +1,675 @@
+{
+  "openapi": "3.0.0",
+  "servers": [
+    {
+      "url": "https://management.azure.com/"
+    }
+  ],
+  "info": {
+    "title": "Microsoft Azure Redis Cache Management API",
+    "description": "Some cool documentation.",
+    "version": "2014-04-01-preview"
+  },
+  "paths": {
+    "/subscriptions/{integer}/{int}/{long}/{number}/{float}/{double}/{string}/{enum}/{byte}/{boolean}/{date}/{dateTime}/{base64url}?invalues='{array}'": {
+      "get": {
+        "operationId": "list",
+        "summary": "Product Types",
+        "description": "The Products endpoint returns information about the Uber products offered at a given location. The response includes the display name and other details about each product, and lists the products in the proper display order.",
+        "parameters": [
+          {
+            "name": "integer",
+            "in": "path",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true
+          },
+          {
+            "name": "int",
+            "in": "path",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "required": true
+          },
+          {
+            "name": "long",
+            "in": "path",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "required": true
+          },
+          {
+            "name": "number",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "float",
+            "in": "path",
+            "schema": {
+              "type": "number",
+              "format": "float"
+            },
+            "required": true
+          },
+          {
+            "name": "double",
+            "in": "path",
+            "schema": {
+              "type": "number",
+              "format": "double"
+            },
+            "required": true
+          },
+          {
+            "name": "decimal",
+            "in": "path",
+            "schema": {
+              "type": "number",
+              "format": "decimal"
+            },
+            "required": true
+          },
+          {
+            "name": "string",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "name": "color",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "red",
+                "blue",
+                "green"
+              ]
+            },
+            "required": true
+          },
+          {
+            "name": "byte",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "byte"
+            },
+            "required": true
+          },
+          {
+            "name": "boolean",
+            "in": "path",
+            "schema": {
+              "type": "boolean"
+            },
+            "required": true
+          },
+          {
+            "name": "date",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "required": true
+          },
+          {
+            "name": "dateTime",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "required": true
+          },
+          {
+            "name": "base64url",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "base64url"
+            },
+            "required": true
+          },
+          {
+            "name": "array",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "color",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "red",
+                "blue",
+                "green",
+                "purple"
+              ]
+            }
+          }
+        ],
+        "tags": [
+          "Redis"
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of caches",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Product"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/differentEnums": {
+      "get": {
+        "operationId": "DiffEnums_list",
+        "summary": "Product Types",
+        "parameters": [
+          {
+            "name": "color",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "cyan",
+                "yellow"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of caches",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "additionalProperties": {
+                    "$ref": "#/components/schemas/Product"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sameEnums": {
+      "get": {
+        "operationId": "SameEnums_get",
+        "summary": "Product Types",
+        "parameters": [
+          {
+            "name": "color2",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "blue",
+                "green",
+                "red"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of caches",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "additionalProperties": {
+                    "$ref": "#/components/schemas/Product"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptionsDictionaryObject": {
+      "get": {
+        "operationId": "getDictionaryObject",
+        "summary": "Product Types",
+        "responses": {
+          "200": {
+            "description": "A list of caches",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "additionalProperties": {
+                    "$ref": "#/components/schemas/Product"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptionsDictionary": {
+      "get": {
+        "operationId": "getDictionaryString",
+        "summary": "Product Types",
+        "responses": {
+          "200": {
+            "description": "A list of caches",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "head": {
+        "operationId": "getDictionaryInt",
+        "summary": "Product Types",
+        "responses": {
+          "200": {
+            "description": "A list of caches",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "additionalProperties": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions": {
+      "get": {
+        "operationId": "get",
+        "summary": "Product Types",
+        "responses": {
+          "200": {
+            "description": "A list of caches",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Product"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "put",
+        "summary": "Create Product Types",
+        "responses": {
+          "200": {
+            "description": "A list of caches",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Product"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "$ref": "#/components/requestBodies/ProductArray"
+        },
+        "x-ms-requestBody-index": 0
+      },
+      "post": {
+        "operationId": "post",
+        "summary": "Post product",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Object"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "$ref": "#/components/requestBodies/ProductArray"
+        },
+        "x-ms-requestBody-index": 0
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Product": {
+        "type": "object",
+        "properties": {
+          "integer": {
+            "type": "integer"
+          },
+          "int": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "long": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "number": {
+            "type": "number"
+          },
+          "float": {
+            "type": "number",
+            "format": "float"
+          },
+          "double": {
+            "type": "number",
+            "format": "double"
+          },
+          "string": {
+            "type": "string"
+          },
+          "color": {
+            "x-ms-enum": {
+              "name": "Colors",
+              "modelAsString": false
+            },
+            "type": "string",
+            "enum": [
+              "red",
+              "blue",
+              "green"
+            ]
+          },
+          "color2": {
+            "type": "string",
+            "enum": [
+              "red",
+              "blue",
+              "green"
+            ]
+          },
+          "color3": {
+            "x-ms-enum": {
+              "name": "Colors",
+              "modelAsString": false
+            },
+            "type": "string",
+            "enum": [
+              "red",
+              "green",
+              "blue"
+            ]
+          },
+          "refColor": {
+            "$ref": "#/components/schemas/RefColor"
+          },
+          "byte": {
+            "type": "string",
+            "format": "byte"
+          },
+          "boolean": {
+            "type": "boolean"
+          },
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "dateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "integerArray": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "intArray": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          "longArray": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          "numberArray": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          },
+          "floatArray": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "float"
+            }
+          },
+          "doubleArray": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            }
+          },
+          "booleanArray": {
+            "type": "array",
+            "items": {
+              "type": "boolean"
+            }
+          },
+          "stringArray": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "byteArrayArray": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "byte"
+            }
+          },
+          "dateArray": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          "dateTimeArray": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        }
+      },
+      "Object": {
+        "type": "object",
+        "properties": {}
+      },
+      "RefColor": {
+        "x-ms-enum": {
+          "name": "refColors",
+          "modelAsString": true
+        },
+        "type": "string",
+        "enum": [
+          "red",
+          "green",
+          "blue"
+        ]
+      },
+      "Error": {
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          },
+          "fields": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "requestBodies": {
+      "ProductArray": {
+        "x-ms-client-name": "product",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/Product"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
