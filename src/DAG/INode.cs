@@ -2,7 +2,7 @@
 
 namespace AutoRest.Core.Model
 {
-    public interface INode<DataT, NodeT> where NodeT : INode<DataT, NodeT>
+    public interface INode<NodeT> where NodeT : INode<NodeT>
     {
         // A key that uniquely identifies this node in the owner graph.
         string Key { get; }
@@ -10,7 +10,7 @@ namespace AutoRest.Core.Model
         /**
          * @return data stored in this node
          */
-        DataT Data { get; }
+        NodeT Data { get; }
 
         /**
          * @return whether this node has children
@@ -37,11 +37,11 @@ namespace AutoRest.Core.Model
          *
          * @param ownerGraph the owning graph
          */
-        void setOwner(IGraph<DataT, NodeT> ownerGraph);
+        void setOwner(IGraph<NodeT> ownerGraph);
 
         /**
          * @return the owner (container) graph of this node.
          */
-        IGraph<DataT, NodeT> owner();
+        IGraph<NodeT> owner();
     }
 }

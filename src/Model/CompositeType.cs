@@ -1,7 +1,9 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.Core.Utilities;
@@ -18,13 +20,51 @@ namespace AutoRest.Core.Model
     /// Defines model data type.
     /// </summary>
     [JsonObject(IsReference = true)]
-    public partial class CompositeType : ModelType, ILiteralType
+    public partial class CompositeType : ModelType, ILiteralType, IDAGNode<CompositeType>
     {
         private string _summary;
         private string _documentation;
         private CompositeType _baseModelType;
+        private DAGNode<CompositeType> dAGNode;
 
         partial void InitializeCollections();
+
+        public ReadOnlyCollection<string> dependentKeys() => dAGNode.dependentKeys();
+
+        public void addDependent(string key) => dAGNode.addDependent(key);
+
+        public ReadOnlyCollection<string> dependencyKeys() => dAGNode.dependencyKeys();
+
+        public void addDependency(string dependencyKey) => dAGNode.addDependency(dependencyKey);
+
+        public void removeDependency(string dependencyKey) => dAGNode.removeDependency(dependencyKey);
+
+        public bool hasDependencies() => dAGNode.hasDependencies();
+
+        public void setPreparer(bool isPreparer) => dAGNode.setPreparer(isPreparer);
+
+        public bool isPreparer() => dAGNode.isPreparer();
+
+        public void initialize() => dAGNode.initialize();
+
+        public bool hasAllResolved() => dAGNode.hasAllResolved();
+
+        public void onSuccessfulResolution(string dependencyKey) => dAGNode.onSuccessfulResolution(dependencyKey);
+
+        public void onFaultedResolution(string dependencyKey, Exception exception) => dAGNode.onFaultedResolution(dependencyKey, exception);
+
+        public bool hasChildren() => dAGNode.hasChildren();
+
+        public ReadOnlyCollection<string> children() => dAGNode.children();
+
+        public void addChild(string childKey) => dAGNode.addChild(childKey);
+
+        public void removeChild(string childKey) => dAGNode.removeChild(childKey);
+
+        public void setOwner(IGraph<CompositeType> ownerGraph) => dAGNode.setOwner(ownerGraph);
+
+        public IGraph<CompositeType> owner() => dAGNode.owner();
+
         /// <summary>
         /// Initializes a new instance of CompositeType class.
         /// </summary>
@@ -32,11 +72,13 @@ namespace AutoRest.Core.Model
         {
             InitializeCollections();
             Name.OnGet += value => CodeNamer.Instance.GetTypeName(value);
+            dAGNode = new DAGNode<CompositeType>(Name);
         }
 
         protected CompositeType(string name) : this()
         {
             Name = name;
+            dAGNode = new DAGNode<CompositeType>(Name);
         }
 
         /// <Summary>
@@ -191,5 +233,9 @@ namespace AutoRest.Core.Model
         }
 
         public static CompositeTypeComparer Comparer => new CompositeTypeComparer();
+
+        public string Key => Name;
+
+        public CompositeType Data => dAGNode.Data;
     }
 }

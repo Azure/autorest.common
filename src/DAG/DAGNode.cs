@@ -10,8 +10,8 @@ namespace AutoRest.Core.Model {
      * @param <DataT> the type of the data stored in the node
      * @param <NodeT> the type of the node
      */
-    public class DAGNode<DataT, NodeT> : Node<DataT, NodeT>, IDAGNode<DataT, NodeT>
-        where NodeT : IDAGNode<DataT, NodeT> {
+    public class DAGNode<NodeT> : Node<NodeT>, IDAGNode<NodeT>
+        where NodeT : IDAGNode<NodeT> {
 
             /**
              * Keys of other nodes that depend on this node.
@@ -34,7 +34,7 @@ namespace AutoRest.Core.Model {
               * @param key unique id of the node
               * @param data data to be stored in the node
               */
-            public DAGNode(string key, DataT data) : base(key, data) {
+            public DAGNode(string key) : base(key) {
                 this._dependentKeys = new List<string>(); 
             }
 

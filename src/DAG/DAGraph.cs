@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 
 namespace AutoRest.Core.Model {
-    public class DAGraph<DataT, NodeT> : Graph<DataT, NodeT>, IDAGraph<DataT, NodeT>
-        where NodeT : IDAGNode<DataT, NodeT> {
+    public class DAGraph<NodeT> : Graph<NodeT>, IDAGraph<NodeT>
+        where NodeT : IDAGNode<NodeT> {
             /**
              * The root node in the graph.
              * nodeTable contains all the nodes in this graph with this as the root.
@@ -14,7 +14,7 @@ namespace AutoRest.Core.Model {
              * The immediate parent graphs of this graph. A parent graph is the one whose root
              * depends on this graph's root.
              */
-            protected List<IDAGraph<DataT, NodeT>> _parentDAGs;
+            protected List<IDAGraph<NodeT>> _parentDAGs;
 
             /**
              * To perform topological sort on the graph. During sorting queue contains the nodes
@@ -23,14 +23,14 @@ namespace AutoRest.Core.Model {
              */
             protected Queue<string> _queue;
 
-            private class Visitor : IVisitor<DataT, NodeT> {
-                IDAGraph<DataT, NodeT> dAGraph;
-            public Visitor(IDAGraph<DataT, NodeT> dAGraph) {
+            private class Visitor : IVisitor<NodeT> {
+                IDAGraph<NodeT> dAGraph;
+            public Visitor(IDAGraph<NodeT> dAGraph) {
                 this.dAGraph = dAGraph;
             }
-            public void visitNode(INode<DataT, NodeT> node)
+            public void visitNode(INode<NodeT> node)
             {
-                var nodeCast = (IDAGNode<DataT, NodeT>)node;
+                var nodeCast = (IDAGNode<NodeT>)node;
                 if (nodeCast.dependencyKeys().Count == 0)
                 {
                     return;
@@ -58,7 +58,7 @@ namespace AutoRest.Core.Model {
             * @param rootNode the root node of this DAG
             */
         public DAGraph(NodeT rootNode) {
-            this._parentDAGs = new List<IDAGraph<DataT, NodeT>>();
+            this._parentDAGs = new List<IDAGraph<NodeT>>();
             this._rootNode = rootNode;
             this._queue = new Queue<string>();
             this._rootNode.setPreparer(true);
@@ -101,7 +101,7 @@ namespace AutoRest.Core.Model {
          *
          * @param dependencyGraph the dependency DAG
          */
-        public void addDependencyGraph(DAGraph<DataT, NodeT> dependencyGraph) {
+        public void addDependencyGraph(DAGraph<NodeT> dependencyGraph) {
             this._rootNode.addDependency(dependencyGraph._rootNode.Key);
             SortedDictionary<string, NodeT> sourceNodeTable = dependencyGraph.nodeTable;
             SortedDictionary<string, NodeT> targetNodeTable = this.nodeTable;
@@ -117,7 +117,7 @@ namespace AutoRest.Core.Model {
             *
             * @param dependentGraph the dependent DAG
             */
-        public void addDependentGraph(DAGraph<DataT, NodeT> dependentGraph) {
+        public void addDependentGraph(DAGraph<NodeT> dependentGraph) {
             dependentGraph.addDependencyGraph(this);
         }
 
@@ -167,7 +167,7 @@ namespace AutoRest.Core.Model {
             completed.setPreparer(true);
             string dependency = completed.Key;
             foreach (string dependentKey in this.nodeTable[dependency].dependentKeys()) {
-                IDAGNode<DataT, NodeT> dependent = this.nodeTable[dependentKey];
+                IDAGNode<NodeT> dependent = this.nodeTable[dependentKey];
                 dependent.onSuccessfulResolution(dependency);
                 if (dependent.hasAllResolved()) {
                     this._queue.Enqueue(dependent.Key);
@@ -185,7 +185,7 @@ namespace AutoRest.Core.Model {
             faulted.setPreparer(true);
             string dependency = faulted.Key;
             foreach (string dependentKey in this.nodeTable[dependency].dependentKeys()) {
-                IDAGNode<DataT, NodeT> dependent = this.nodeTable[dependentKey];
+                IDAGNode<NodeT> dependent = this.nodeTable[dependentKey];
                 dependent.onFaultedResolution(dependency, exception);
                 if (dependent.hasAllResolved()) {
                     this._queue.Enqueue(dependent.Key);
@@ -240,14 +240,14 @@ namespace AutoRest.Core.Model {
         /**
             * Propogates node table of given DAG to all of its ancestors.
             */
-        private void bubbleUpNodeTable(DAGraph<DataT, NodeT> from, LinkedList<string> path) {
+        private void bubbleUpNodeTable(DAGraph<NodeT> from, LinkedList<string> path) {
             if (path.Contains(from._rootNode.Key))
             {
                 path.AddFirst(from._rootNode.Key); // For better error message
                 throw new InvalidOperationException("Detected circular dependency: " + String.Join(" -> ", path));
             }
             path.AddFirst(from._rootNode.Key);
-            foreach (DAGraph<DataT, NodeT> to in from._parentDAGs)
+            foreach (DAGraph<NodeT> to in from._parentDAGs)
             {
                 this.merge(from.nodeTable, to.nodeTable);
                 this.bubbleUpNodeTable(to, path);

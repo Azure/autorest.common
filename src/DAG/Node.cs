@@ -4,17 +4,16 @@ using System.Collections.ObjectModel;
 using System.Collections.Generic;
 
 namespace AutoRest.Core.Model {
-    public class Node<DataT, NodeT> : INode<DataT, NodeT>
-        where NodeT : INode<DataT, NodeT>{
+    public class Node<NodeT> : INode<NodeT>
+        where NodeT : INode<NodeT>{
         // The graph that owns this node.
-        private IGraph<DataT, NodeT> _ownerGraph;
+        private IGraph<NodeT> _ownerGraph;
 
         // The collection of child node keys.
         private List<string> _children;
 
-        public Node(string key, DataT data) {
+        public Node(string key) {
             this.Key = key;
-            this.Data = data;
             this._children = new List<String>();
         }
 
@@ -24,7 +23,7 @@ namespace AutoRest.Core.Model {
         /**
          * @return data stored in this node
          */
-         public DataT Data { get; private set; }
+         public NodeT Data { get; private set; }
 
         /**
          * @return whether this node has children
@@ -51,7 +50,7 @@ namespace AutoRest.Core.Model {
          *
          * @param ownerGraph the owning graph
          */
-        public void setOwner(IGraph<DataT, NodeT> ownerGraph) {
+        public void setOwner(IGraph<NodeT> ownerGraph) {
             if (this._ownerGraph != null) {
                 throw new SystemException("Changing owner graph is not allowed");
             }
@@ -61,7 +60,7 @@ namespace AutoRest.Core.Model {
         /**
          * @return the owner (container) graph of this node.
          */
-        public IGraph<DataT, NodeT> owner() {
+        public IGraph<NodeT> owner() {
             if (this._ownerGraph == null) {
                 throw new SystemException("Required owner graph is not set");
             }

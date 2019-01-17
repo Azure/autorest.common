@@ -3,8 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace AutoRest.Core.Model {
-    public class Graph<DataT, NodeT> : IGraph<DataT, NodeT>
-        where NodeT : INode<DataT, NodeT> {
+    public class Graph<NodeT> : IGraph<NodeT>
+        where NodeT : INode<NodeT> {
         // The nodes in the graph.
         public SortedDictionary<string, NodeT> nodeTable { get; private set; }
 
@@ -62,7 +62,7 @@ namespace AutoRest.Core.Model {
         *
         * @param visitor the graph visitor
         */
-        public void visit(IVisitor<DataT, NodeT> visitor) {
+        public void visit(IVisitor<NodeT> visitor) {
             foreach (KeyValuePair<string, NodeT> item in nodeTable) {
                 if (!_visited.Contains(item.Key)) {
                     this.dfs(visitor, item.Value);
@@ -76,7 +76,7 @@ namespace AutoRest.Core.Model {
             this._processed.Clear();
         }
 
-        private void dfs(IVisitor<DataT, NodeT> visitor, INode<DataT, NodeT> node) {
+        private void dfs(IVisitor<NodeT> visitor, INode<NodeT> node) {
             visitor.visitNode(node);
 
             string fromKey = node.Key;

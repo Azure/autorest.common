@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AutoRest.Core.Model
 {
-    public interface IGraph<DataT, NodeT> where NodeT : INode<DataT, NodeT>
+    public interface IGraph<NodeT> where NodeT : INode<NodeT>
     {
         // The nodes in the graph.
         SortedDictionary<string, NodeT> nodeTable { get; }
@@ -29,7 +29,7 @@ namespace AutoRest.Core.Model
         *
         * @param visitor the graph visitor
         */
-        void visit(IVisitor<DataT, NodeT> visitor);
+        void visit(IVisitor<NodeT> visitor);
 
         string findPath(string start, string end);
     }

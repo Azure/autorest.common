@@ -4,8 +4,8 @@ using System.Text;
 
 namespace AutoRest.Core.Model
 {
-    public interface IDAGraph<DataT, NodeT> : IGraph<DataT, NodeT>
-        where NodeT : IDAGNode<DataT, NodeT>
+    public interface IDAGraph<NodeT> : IGraph<NodeT>
+        where NodeT : IDAGNode<NodeT>
     {
         /**
             * @return true if this DAG is merged with one or more DAG and hence has parents

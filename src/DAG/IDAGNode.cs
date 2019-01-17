@@ -5,8 +5,8 @@ using System.Text;
 
 namespace AutoRest.Core.Model
 {
-    public interface IDAGNode<DataT, NodeT> : INode<DataT, NodeT>
-        where NodeT : IDAGNode<DataT, NodeT>
+    public interface IDAGNode<NodeT> : INode<NodeT>
+        where NodeT : IDAGNode<NodeT>
     {
 
 
