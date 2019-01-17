@@ -41,7 +41,7 @@ namespace AutoRest.Modeler
             _effectiveConsumes = operation.GetConsumes(swaggerModeler.ServiceDefinition.Components.RequestBodies).ToList();
         }
 
-        public Method BuildMethod(HttpMethod httpMethod, string url, string methodName, string methodGroup)
+        public Method BuildMethod(HttpMethod httpMethod, string url, string methodName, string methodGroup, XmsMetadata metadata)
         {
             EnsureUniqueMethodName(methodName, methodGroup);
 
@@ -50,7 +50,8 @@ namespace AutoRest.Modeler
                 HttpMethod = httpMethod,
                 Url = url,
                 Name = methodName,
-                SerializedName = _operation.OperationId
+                SerializedName = _operation.OperationId,
+                XMsMetadata = metadata
             });
 
             // non-REST operations:

@@ -58,7 +58,8 @@ namespace AutoRest.Modeler
                 Name = unwrappedParameter.Name,
                 SerializedName = unwrappedParameter.Name,
                 ModelType = parameterType,
-                Location = (Core.Model.ParameterLocation)Enum.Parse(typeof(Core.Model.ParameterLocation), unwrappedParameter.In.ToString())
+                Location = (Core.Model.ParameterLocation)Enum.Parse(typeof(Core.Model.ParameterLocation), unwrappedParameter.In.ToString()),
+                XMsMetadata = _swaggerParameter.XMsMetadata
             });
 
             // translate allowReserved back to what "code-model-v1"-gen generators expect

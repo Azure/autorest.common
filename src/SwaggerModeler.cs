@@ -103,7 +103,7 @@ namespace AutoRest.Modeler
                         {
                             url = url.Substring(0, url.IndexOf('?'));
                         }
-                        var method = BuildMethod(verb.ToHttpMethod(), url, methodName, operation);
+                        var method = BuildMethod(verb.ToHttpMethod(), url, methodName, operation, path.Value.XMsMetadata);
                         method.Group = methodGroup;
                         methods.Add(method);
 
@@ -399,12 +399,11 @@ namespace AutoRest.Modeler
         /// <param name="name"></param>
         /// <param name="operation"></param>
         /// <returns></returns>
-        public Method BuildMethod(HttpMethod httpMethod, string url, string name,
-            Operation operation)
+        public Method BuildMethod(HttpMethod httpMethod, string url, string name, Operation operation, XmsMetadata metadata)
         {
             string methodGroup = GetMethodGroup(operation);
             var operationBuilder = new OperationBuilder(operation, this);
-            Method method = operationBuilder.BuildMethod(httpMethod, url, name, methodGroup);
+            Method method = operationBuilder.BuildMethod(httpMethod, url, name, methodGroup, metadata);
             return method;
         }
 

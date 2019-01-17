@@ -66,7 +66,8 @@ namespace AutoRest.Modeler
                         SerializedName = actualTypeName,
                         Documentation = _schema.Description,
                         ExternalDocsUrl = _schema.ExternalDocs?.Url,
-                        Summary = _schema.Title
+                        Summary = _schema.Title,
+                        XMsMetadata = _schema.XMsMetadata
                     });
 
                     // associate this type with its schema (by reference) in order to allow recursive models to terminate

@@ -78,5 +78,8 @@ namespace AutoRest.Core.Model
 
         [JsonIgnore]
         public override string Qualifier => "Parameter";
+
+        [JsonProperty(PropertyName = "x-ms-metadata")]
+        public XmsMetadata XMsMetadata { get; set; }
     }
 }

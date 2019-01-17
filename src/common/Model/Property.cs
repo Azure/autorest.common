@@ -152,5 +152,8 @@ namespace AutoRest.Core.Model
             (this.ModelType as DictionaryType)?.SupportsAdditionalProperties == true ? PropertyFlavor.AdditionalProperties :
             this.SerializedName == null ? PropertyFlavor.Implementation :
             PropertyFlavor.Regular;
+        
+        [JsonProperty(PropertyName = "x-ms-metadata")]
+        public XmsMetadata XMsMetadata { get; set; }
     }
 }
