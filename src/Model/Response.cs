@@ -1,44 +1,33 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System.Collections.Generic;
-using System.Globalization;
 using AutoRest.Core.Utilities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
-namespace AutoRest.Core.Model
+namespace AutoRest.Modeler.Model
 {
     /// <summary>
-    /// Defines a structure for operation response.
+    /// Describes a single response from an API Operation.
     /// </summary>
-    public class Response
+    public class OperationResponse : SwaggerBase
     {
-        /// <summary>
-        /// Initializes a new instance of Response.
-        /// </summary>
-        /// <param name="body">Body type.</param>
-        /// <param name="headers">Headers type.</param>
-        public Response(IModelType body, IModelType headers) 
+        private string _description;
+
+        public string Description
         {
-            Body = body;
-            Headers = headers;
+            get { return _description; }
+            set { _description = value.StripControlCharacters(); }
         }
 
-        public Response()
-        {
-            
-        }
-        /// <summary>
-        /// Gets or sets the body type.
-        /// </summary>
-        public IModelType Body{ get; set; }
+        // TODO: get rid of this
+        public Schema Schema => Content?.Values.FirstOrDefault()?.Schema;
 
-        /// <summary>
-        /// Gets or sets the headers type.
-        /// </summary>
-        public IModelType Headers { get; set; }
+        public Dictionary<string, MediaTypeObject> Content { get; set; }
 
-        public Dictionary<string, object> Extensions { get; set; } = new Dictionary<string, object>();
+        public Dictionary<string, Header> Headers { get; set; }
 
-        public bool IsNullable => Extensions?.Get<bool>("x-nullable") ?? true;
+        public Dictionary<string, object> Examples { get; set; }
     }
 }

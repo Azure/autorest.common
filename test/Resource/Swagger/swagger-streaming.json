@@ -1,0 +1,133 @@
+{
+  "openapi": "3.0.0",
+  "servers": [
+    {
+      "url": "http://http://autorestresourcesproxysite.azurewebsites.net/Autorest.HelloWorld/"
+    }
+  ],
+  "info": {
+    "version": "1.0.13",
+    "title": "Swagger Stream Store"
+  },
+  "paths": {
+    "/values/formDate": {
+      "post": {
+        "tags": [
+          "Values"
+        ],
+        "operationId": "GetWithStreamFormData",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "image/jpeg": {
+                "schema": {
+                  "type": "file"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "x-ms-client-name": "fileContent",
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "fileContent": {
+                    "description": "file to upload",
+                    "type": "file"
+                  }
+                },
+                "required": [
+                  "fileContent"
+                ]
+              }
+            }
+          }
+        },
+        "x-ms-requestBody-index": 0
+      },
+      "get": {
+        "tags": [
+          "Values"
+        ],
+        "operationId": "PostWithByteArrayFormData",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "image/jpeg": {
+                "schema": {
+                  "type": "string",
+                  "format": "byte"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "x-ms-client-name": "fileContent",
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "fileContent": {
+                    "description": "file to upload",
+                    "type": "string",
+                    "format": "byte"
+                  }
+                },
+                "required": [
+                  "fileContent"
+                ]
+              }
+            }
+          }
+        },
+        "x-ms-requestBody-index": 0
+      }
+    },
+    "/values": {
+      "post": {
+        "tags": [
+          "Values"
+        ],
+        "operationId": "GetWithStream",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "image/jpeg": {
+                "schema": {
+                  "type": "file"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Values"
+        ],
+        "operationId": "PostWithByteArray",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "image/jpeg": {
+                "schema": {
+                  "type": "string",
+                  "format": "byte"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

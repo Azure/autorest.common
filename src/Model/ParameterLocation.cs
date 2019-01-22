@@ -1,18 +1,19 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-namespace AutoRest.Core.Model
+namespace AutoRest.Modeler.Model
 {
     /// <summary>
-    /// Defines available parameter locations
+    /// The location of the parameter.
     /// </summary>
     public enum ParameterLocation
     {
-        None = 0,
-        Path,
+        None,
         Query,
         Header,
+        Path,
+        FormData,
         Body,
-        FormData
+        Cookie
     }
 }
