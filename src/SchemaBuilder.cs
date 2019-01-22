@@ -120,7 +120,8 @@ namespace AutoRest.Modeler
                                 {
                                     propertyServiceTypeName = propertyValue.Reference.StripComponentsSchemaPath();
                                     var unwrappedSchema = Modeler.Resolver.Unwrap(propertyValue);
-
+                                    refSchema = new Schema().LoadFrom(unwrappedSchema);
+                                    
                                     // For Enums use the referenced schema in order to set the correct property Type and Enum values
                                     if (unwrappedSchema.Enum != null)
                                     {
