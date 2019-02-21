@@ -236,16 +236,19 @@ namespace AutoRest.Modeler
             {
                 var parentPropertyToCompare = parentProperty;
                 var unwrappedPropertyToCompare = unwrappedProperty;
+                var dereferenced = false;
                 if (!string.IsNullOrEmpty(parentProperty.Reference))
                 {
+                    dereferenced = true;
                     parentPropertyToCompare = Dereference(parentProperty.Reference);
                 }
                 if (!string.IsNullOrEmpty(unwrappedProperty.Reference))
                 {
+                    dereferenced = true;
                     unwrappedPropertyToCompare = Dereference(unwrappedProperty.Reference);
                 }
 
-                if (parentPropertyToCompare == unwrappedPropertyToCompare)
+                if (parentPropertyToCompare == unwrappedPropertyToCompare || (dereferenced && SchemaTypesAreEquivalent( parentPropertyToCompare, unwrappedPropertyToCompare)))
                 {
                     return true; // when fully dereferenced, they can refer to the same thing
                 }
