@@ -79,8 +79,8 @@ public abstract class NewPlugin :  AutoRest.Core.IHost
     public Task<string[]> ListInputs() => _connection.Request<string[]>("ListInputs", _sessionId,null);
     public Task<string[]> ListInputs(string artifactType) => _connection.Request<string[]>("ListInputs", _sessionId, artifactType);
 
-    public void Message(Message message) => _connection.Notify("Message", _sessionId, message);
-    public void WriteFile(string filename, string content, object sourcemap) => _connection.Notify("WriteFile", _sessionId, filename, content, sourcemap);
+    public void Message(Message message) => _connection.Notify("Message", _sessionId, message).Wait();
+    public void WriteFile(string filename, string content, object sourcemap) => _connection.Notify("WriteFile", _sessionId, filename, content, sourcemap).Wait();
     public void WriteFile(string filename, string content, object sourcemap, string artifactType) => _connection.Notify( "Message", _sessionId, new Message { 
         Channel = "file", 
         Details = new { 
@@ -91,7 +91,7 @@ public abstract class NewPlugin :  AutoRest.Core.IHost
         },
         Text= content, 
         Key= new[] {artifactType,filename}
-    });
+    }).Wait();
 
     public async Task ProtectFiles( string path ) {
         try {
@@ -135,7 +135,7 @@ public abstract class NewPlugin :  AutoRest.Core.IHost
              Channel = "configuration",
              Key = new [] { filename },
              Text = content
-         });
+         }).Wait();
     }
 
     private Connection _connection;
