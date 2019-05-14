@@ -31,6 +31,7 @@ namespace AutoRest.Extensions.Azure
         public const string AzureResourceExtension = "x-ms-azure-resource";
         public const string ODataExtension = "x-ms-odata";
         public const string ClientRequestIdExtension = "x-ms-client-request-id";
+        public const string CorrelationRequestIdExtension = "x-ms-correlation-request-id";
 
         //TODO: Ideally this would be the same extension as the ClientRequestIdExtension and have it specified on the response headers,
         //TODO: But the response headers aren't currently used at all so we put an extension on the operation for now
@@ -512,6 +513,27 @@ namespace AutoRest.Extensions.Azure
             {
                 throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture, "Method missing expected {0} extension", ClientRequestIdExtension));
             }
+        }
+
+        public static string GetCorrelationRequestIdString(Method method)
+        {
+            if (method == null)
+            {
+                throw new ArgumentNullException("method");
+            }
+
+            string correlationRequestIdName = "x-ms-correlation-request-id";
+
+            if (method.Extensions.ContainsKey(CorrelationRequestIdExtension))
+            {
+                string extensionObject = method.Extensions[CorrelationRequestIdExtension] as string;
+                if (extensionObject != null)
+                {
+                    correlationRequestIdName = extensionObject;
+                }
+            }
+            
+            return correlationRequestIdName;
         }
 
         public static string GetRequestIdString(Method method)
