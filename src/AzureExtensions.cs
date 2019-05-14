@@ -35,7 +35,7 @@ namespace AutoRest.Extensions.Azure
 
         //TODO: Ideally this would be the same extension as the ClientRequestIdExtension and have it specified on the response headers,
         //TODO: But the response headers aren't currently used at all so we put an extension on the operation for now
-        public const string RequestIdExtension = "x-ms-request-id";        
+        public const string RequestIdExtension = "x-ms-request-id";
         public const string ApiVersion = "api-version";
         public const string AcceptLanguage = "accept-language";
         
@@ -137,7 +137,7 @@ namespace AutoRest.Extensions.Azure
                 });
                 cloudError.Extensions[ExternalExtension] = true;
                 codeModel.Add(cloudError);
-            }            
+            }
             // Set default response if not defined explicitly
             foreach (var method in codeModel.Methods)
             {
