@@ -84,5 +84,33 @@ namespace AutoRest.Modeler.Model
             return null;
         }
 
+        public static IEqualityComparer<Schema> Comparer = new SchemaEqualityComparer();
+
+        private class SchemaEqualityComparer : IEqualityComparer<Schema>
+        {
+            public bool Equals(Schema x, Schema y)
+            {
+                if (x == null && y == null)
+                {
+                    return true;
+                }
+                if (x == null || y == null)
+                {
+                    return false;
+                }
+                return x.Description == y.Description
+                    && x.Title == y.Title
+                    && x.ExternalDocs?.Url == y.ExternalDocs?.Url
+                    && EqualityComparer<XmsMetadata>.Default.Equals(x.XMsMetadata, y.XMsMetadata);
+            }
+
+            public int GetHashCode(Schema obj)
+            {
+                return EqualityComparer<string>.Default.GetHashCode(obj.Description)
+                    ^ EqualityComparer<string>.Default.GetHashCode(obj.Title)
+                    ^ EqualityComparer<string>.Default.GetHashCode(obj.ExternalDocs?.Url)
+                    ^ EqualityComparer<XmsMetadata>.Default.GetHashCode(obj.XMsMetadata);
+            }
+        }
     }
 }
