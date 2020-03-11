@@ -26,7 +26,7 @@ namespace AutoRest.Modeler
     {
         internal Dictionary<string, string> ExtendedTypes = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
         internal Dictionary<string, CompositeType> GeneratedTypes = new Dictionary<string, CompositeType>();
-        internal Dictionary<Schema, CompositeType> GeneratingTypes = new Dictionary<Schema, CompositeType>();
+        internal Dictionary<Schema, CompositeType> GeneratingTypes = new Dictionary<Schema, CompositeType>(Schema.Comparer);
 
         public bool GenerateEmptyClasses { get; private set; }
 
