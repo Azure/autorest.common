@@ -369,7 +369,7 @@ namespace AutoRest.Extensions.Azure
                         nextLinkMethod.Add(nextLinkParameter);
 
                         // Need copy all the header parameters from List method to ListNext method
-                       foreach (var param in method.Parameters.Where(p => p.Location == ParameterLocation.Header))
+                       foreach (var param in method.Parameters.Where(p => p.Location == ParameterLocation.Header || p.Location == ParameterLocation.Query))
                        {
                             nextLinkMethod.Add(Duplicate(param));
                        }
