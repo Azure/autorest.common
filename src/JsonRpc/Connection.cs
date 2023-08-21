@@ -36,7 +36,7 @@ namespace Microsoft.Perks.JsonRPC
 
         public void Stop() => _cancellationTokenSource.Cancel();
 
-        private async Task<JToken> ReadJson()
+        private Task<JToken> ReadJson()
         {
             var jsonText = string.Empty;
             JToken json = null;
@@ -51,7 +51,7 @@ namespace Microsoft.Perks.JsonRPC
                         json = JObject.Parse(jsonText);
                         if (json != null)
                         {
-                            return json;
+                            return Task.FromResult(json);
                         }
                     }
                     catch
@@ -67,7 +67,7 @@ namespace Microsoft.Perks.JsonRPC
                         json = JArray.Parse(jsonText);
                         if (json != null)
                         {
-                            return json;
+                            return Task.FromResult(json);
                         }
                     }
                     catch
@@ -76,7 +76,7 @@ namespace Microsoft.Perks.JsonRPC
                     }
                 }
             }
-            return json;
+            return Task.FromResult(json);
         }
         private Dictionary<string, Func<JToken, Task<string>>> _dispatch = new Dictionary<string, Func<JToken, Task<string>>>();
         public void Dispatch<T>(string path, Func<Task<T>> method)
@@ -141,10 +141,10 @@ namespace Microsoft.Perks.JsonRPC
 
         public void DispatchNotification(string path, Action method)
         {
-            _dispatch.Add(path, async (input) =>
+            _dispatch.Add(path, (input) =>
             {
                 method();
-                return null;
+                return Task.FromResult<string>(null);
             });
         }
 
